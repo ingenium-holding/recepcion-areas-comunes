@@ -482,20 +482,20 @@ footer {
 <!-- KPI CARDS -->
 <div class="kpi-grid">
   <div class="kpi highlight">
-    <div class="value c-primary">44.8%</div>
+    <div class="value c-primary">47.4%</div>
     <div class="label">Progreso General</div>
-    <div class="sub">874 de 1,951 docs</div>
+    <div class="sub">924 de 1,951 docs</div>
   </div>
   <div class="kpi">
-    <div class="value">19<span style="font-size:.9rem;color:var(--muted)">/44</span></div>
+    <div class="value">20<span style="font-size:.9rem;color:var(--muted)">/44</span></div>
     <div class="label">Pasos Ejecutados</div>
   </div>
   <div class="kpi">
-    <div class="value">~22<span style="font-size:.8rem;color:var(--muted)"> min</span></div>
+    <div class="value">~25<span style="font-size:.8rem;color:var(--muted)"> min</span></div>
     <div class="label">Tiempo Invertido</div>
   </div>
   <div class="kpi">
-    <div class="value">104K</div>
+    <div class="value">108K</div>
     <div class="label">Tokens Consumidos</div>
   </div>
   <div class="kpi">
@@ -511,11 +511,11 @@ footer {
 <!-- GLOBAL PROGRESS -->
 <div class="progress-section">
   <div class="progress-track">
-    <div class="progress-fill" style="width:44.8%"></div>
+    <div class="progress-fill" style="width:47.4%"></div>
   </div>
   <div class="progress-stats">
-    <span><strong>874</strong> procesados</span>
-    <span><strong>1,077</strong> pendientes</span>
+    <span><strong>924</strong> procesados</span>
+    <span><strong>1,027</strong> pendientes</span>
     <span><strong>1,951</strong> total</span>
   </div>
 </div>
@@ -867,8 +867,8 @@ footer {
     <span class="phase-badge badge-b">FASE C</span>
     <span class="phase-title">Bienes Esenciales</span>
     <span class="phase-meta">1,178 archivos</span>
-    <div class="phase-mini-bar"><div class="phase-mini-fill fill-primary" style="width:8.6%"></div></div>
-    <span class="phase-pct" style="color:var(--primary)">8.6%</span>
+    <div class="phase-mini-bar"><div class="phase-mini-fill fill-primary" style="width:12.8%"></div></div>
+    <span class="phase-pct" style="color:var(--primary)">12.8%</span>
     <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
   </div>
   <div class="phase-body">
@@ -904,11 +904,19 @@ footer {
       <p style="margin-top:6px;color:var(--accent);">Hallazgos: 3 posibles duplicados por fecha, typos &ldquo;Torre Gua&rdquo; y &ldquo;TORRES TORRES&rdquo;</p>
     </div>
 
-    <!-- C3.01 (pendiente) -->
-    <div class="step-row pending">
-      <div class="step-icon wait"></div>
-      <div class="step-name"><strong>C3.01</strong><span>Ganchos + Equipos + Impermeabilizaciones (1)</span></div>
-      <div class="step-files">50 archivos</div>
+    <!-- C3.01 -->
+    <div class="step-row completed" onclick="toggleStep('c301')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C3.01</strong><span>Ganchos + Equipos + Impermeab Cubiertas T1-T15</span></div>
+      <div class="step-files">50 archivos &middot; ~3 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c301">
+      <p>2 Ganchos: <code>EST_PLN_</code> (1 DWG + 1 PDF con doble extension .pdf.pdf)</p>
+      <p>2 Hoja Vida Equipos: <code>ELE_HVE_</code> declaracion + <code>ELE_CER_</code> certificados transformador</p>
+      <p>45 Impermeab Cubiertas T1-T15: <code>DOT_ACT_</code> actas (T1-5,13-15) + <code>DOT_CER_</code> certificados (T6-12) + <code>DOT_FT_</code> fichas tecnicas</p>
+      <p>1 Manual mantenimiento cubiertas: <code>DOT_MTO_</code></p>
+      <p style="margin-top:6px;color:var(--accent);">Hallazgos: 30 duplicados masivos (impac-5000 y MANTO ROOFER copiados en cada torre)</p>
     </div>
     <!-- C3.02 -->
     <div class="step-row pending">
@@ -1078,9 +1086,14 @@ footer {
         <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
         <div class="bar-label">C2.01</div>
       </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C3.01</div>
+      </div>
     </div>
     <div style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--muted);">
-      Total acumulado: <strong style="color:var(--text);">104K tokens</strong> &middot; Promedio por paso: <strong style="color:var(--text);">5.5K</strong>
+      Total acumulado: <strong style="color:var(--text);">108K tokens</strong> &middot; Promedio por paso: <strong style="color:var(--text);">5.4K</strong>
     </div>
   </div>
 </div>
