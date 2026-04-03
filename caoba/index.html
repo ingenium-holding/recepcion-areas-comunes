@@ -499,8 +499,8 @@ footer {
     <div class="label">Tokens Consumidos</div>
   </div>
   <div class="kpi">
-    <div class="value c-accent">89</div>
-    <div class="label">Hallazgos</div>
+    <div class="value c-accent">267</div>
+    <div class="label">Copias Eliminables</div>
   </div>
   <div class="kpi">
     <div class="value c-success">3<span style="font-size:.9rem;color:var(--muted)">/3</span></div>
@@ -535,148 +535,40 @@ footer {
     <!-- A.01 -->
     <div class="step-row completed" onclick="toggleStep('a01')">
       <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>A.01</strong><span>Dotaciones zona social 1</span></div>
-      <div class="step-files">46 archivos</div>
+      <div class="step-name"><strong>A.01</strong><span>Dotaciones zona social (8 zonas)</span></div>
+      <div class="step-files">46 archivos &middot; ~3 min</div>
       <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
     </div>
-    <div class="step-detail" id="a01">
-      <div class="detail-filter">
-        <input type="text" placeholder="Filtrar documentos..." oninput="filterTable(this,'a01-table')">
-        <span class="detail-count" id="a01-count">46 documentos</span>
-      </div>
-      <div class="detail-table-wrap">
-        <table class="detail-table" id="a01-table">
-          <thead><tr><th>#</th><th>Carpeta</th><th>Original</th><th>Nuevo</th><th>Obs</th></tr></thead>
-          <tbody>
-<tr><td>1</td><td>BICICLETEROS/FICHA TEC</td><td>CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td>DOT_CER_CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
-<tr><td>2</td><td>BICICLETEROS/CERTIFICADO</td><td>CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td>DOT_CER_CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td><span class="obs-tag obs-dup">DUPLICADO</span></td></tr>
-<tr><td>3</td><td>BICICLETEROS/MANUAL</td><td>CARTA GARANTIA CAOBA 22-05-2025 (18).pdf</td><td>DOT_CER_CARTA GARANTIA CAOBA 22-05-2025 (18).pdf</td><td><span class="obs-tag obs-default">Es certificado</span></td></tr>
-<tr><td>4</td><td>BIOSALUDABLES/CERT</td><td>manual de mantenimiento y garantia biosaludables (1).pdf</td><td>DOT_CER_manual de mantenimiento y garantia biosaludables (1).pdf</td><td><span class="obs-tag obs-default">Garantia+manual</span></td></tr>
-<tr><td>5</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA PATIN (CAMINADOR AEREO).jpg</td><td>DOT_FT_FICHA TECNICA PATIN (CAMINADOR AEREO).jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>6</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA COLUMPIO (EXTENCION DE PIERNAS).jpg</td><td>DOT_FT_FICHA TECNICA COLUMPIO (EXTENCION DE PIERNAS).jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>7</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA VOLANTE.jpg</td><td>DOT_FT_FICHA TECNICA VOLANTE.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>8</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA TUMBONA.jpg</td><td>DOT_FT_FICHA TECNICA TUMBONA.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>9</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA BARRAS.jpg</td><td>DOT_FT_FICHA TECNICA BARRAS.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>10</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA TWISTER.jpg</td><td>DOT_FT_FICHA TECNICA TWISTER.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>11</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA SURF.jpg</td><td>DOT_FT_FICHA TECNICA SURF.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
-<tr><td>12</td><td>BIOSALUDABLES/MTO</td><td>manual de uso biosaludables.pdf</td><td>DOT_MTO_manual de uso biosaludables.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>13</td><td>CANCHA MULT/MTO</td><td>Manual Cancha Multiple.pdf</td><td>DOT_MTO_Manual Cancha Multiple.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>14</td><td>CANCHA MULT/MTO</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td><span class="obs-tag obs-dup">Es acta. DUPLICADO</span></td></tr>
-<tr><td>15</td><td>CANCHA MULT/CERT</td><td>CERTIFICADO DE GARANTIA CANCHA MULTIPLE CAPITAL.pdf</td><td>DOT_CER_CERTIFICADO DE GARANTIA CANCHA MULTIPLE CAPITAL.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>16</td><td>CANCHA MULT/CERT</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #14</span></td></tr>
-<tr><td>17</td><td>CANCHA MULT/FT</td><td>Ficha Tecnica Cancha Multiple Funza.pdf</td><td>DOT_FT_Ficha Tecnica Cancha Multiple Funza.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>18</td><td>CANCHA VOLLEY/MTO</td><td>ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO</span></td></tr>
-<tr><td>19</td><td>CANCHA VOLLEY/CERT</td><td>ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #18</span></td></tr>
-<tr><td>20</td><td>CANCHA VOLLEY/FT</td><td>FICHA TECNICA CANCHA DE VOLEIBOL NACIONAL (1)1.pdf</td><td>DOT_FT_FICHA TECNICA CANCHA DE VOLEIBOL NACIONAL (1)1.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>21</td><td>GIMNASIO/MTO</td><td>Manual Caminadora X3i - En Ingles Movifit.pdf</td><td>DOT_MTO_Manual Caminadora X3i - En Ingles Movifit.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>22</td><td>GIMNASIO/MTO</td><td>Manual Eliptica FS 380 - En Espanol XTERRA (1).pdf</td><td>DOT_MTO_Manual Eliptica FS 380 - En Espanol XTERRA (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>23</td><td>GIMNASIO/CERT</td><td>CARTA DE GARANTIA - CONSTRUCTORA CAPITAL BOGOTA S A S - CAOBA.pdf</td><td>DOT_CER_CARTA DE GARANTIA - CONSTRUCTORA CAPITAL BOGOTA S A S - CAOBA.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>24</td><td>GIMNASIO/CERT</td><td>Ventaneria.pdf</td><td>DOT_CER_Ventaneria.pdf</td><td><span class="obs-tag obs-default">Fuera de contexto</span></td></tr>
-<tr><td>25</td><td>GIMNASIO/FT</td><td>FICHA X3IBE (1).pdf</td><td>DOT_FT_FICHA X3IBE (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>26</td><td>GIMNASIO/FT</td><td>FICHA NMAN (1).pdf</td><td>DOT_FT_FICHA NMAN (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>27</td><td>GIMNASIO/FT</td><td>factura vinilos.pdf</td><td>DOT_FAC_factura vinilos.pdf</td><td><span class="obs-tag obs-default">Es FACTURA</span></td></tr>
-<tr><td>28</td><td>JUEGOS INF/CERT</td><td>FT AU-M003 Carro de Bomberos.pdf</td><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
-<tr><td>29</td><td>JUEGOS INF/CERT</td><td>ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
-<tr><td>30</td><td>JUEGOS INF/FT</td><td>FT AU-M003 Carro de Bomberos.pdf</td><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #28</span></td></tr>
-<tr><td>31</td><td>JUEGOS INF/FT</td><td>ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #29</span></td></tr>
-<tr><td>32</td><td>JUEGOS INF/MTO</td><td>FT AU-M003 Carro de Bomberos.pdf</td><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #28</span></td></tr>
-<tr><td>33</td><td>JUEGOS INF/MTO</td><td>ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #29</span></td></tr>
-<tr><td>34</td><td>SALON JUEGOS/CERT</td><td>GR-2025-08 CONSTRUCTORA CAPITAL - OBRA CAOBA MESAS DE JUEGOS (2).pdf</td><td>DOT_CER_GR-2025-08 CONSTRUCTORA CAPITAL - OBRA CAOBA MESAS.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>35</td><td>SALON JUEGOS/CERT</td><td>XBOX.pdf</td><td>DOT_CER_XBOX.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>36</td><td>SALON JUEGOS/CERT</td><td>TV 1.pdf</td><td>DOT_CER_TV 1.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>37</td><td>SALON JUEGOS/CERT</td><td>TV 2.pdf</td><td>DOT_CER_TV 2.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>38</td><td>SALON JUEGOS/FT</td><td>Ficha Tecnica Mesa de Billar Pool (1).pdf</td><td>DOT_FT_Ficha Tecnica Mesa de Billar Pool (1).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td></tr>
-<tr><td>39</td><td>SALON JUEGOS/FT</td><td>HIELO 3.pdf</td><td>DOT_FT_HIELO 3.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
-<tr><td>40</td><td>SALON JUEGOS/FT</td><td>HIELO 2.pdf</td><td>DOT_FT_HIELO 2.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
-<tr><td>41</td><td>SALON JUEGOS/FT</td><td>factura vinilos.pdf</td><td>DOT_FAC_factura vinilos.pdf</td><td><span class="obs-tag obs-default">Es FACTURA</span></td></tr>
-<tr><td>42</td><td>SALON JUEGOS/FT</td><td>HIELO 1.pdf</td><td>DOT_FT_HIELO 1.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
-<tr><td>43</td><td>SALON JUEGOS/FT</td><td>Ficha Tecnica Mesa de Ping Pong (2).pdf</td><td>DOT_FT_Ficha Tecnica Mesa de Ping Pong (2).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td></tr>
-<tr><td>44</td><td>SALON REC INF/FT</td><td>Ficha Tecnica Parque CAOBA.pdf</td><td>DOT_FT_Ficha Tecnica Parque CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO</span></td></tr>
-<tr><td>45</td><td>SALON REC INF/CERT</td><td>GR-2025-22 CONSTRUCTORA CAPITAL - OBRA CAOBA.pdf</td><td>DOT_CER_GR-2025-22 CONSTRUCTORA CAPITAL - OBRA CAOBA.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>46</td><td>SALON REC INF/MTO</td><td>Ficha Tecnica Parque CAOBA.pdf</td><td>DOT_FT_Ficha Tecnica Parque CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #44</span></td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="step-summary" id="a01">
+      <p>BICICLETEROS (3) + BIOSALUDABLES (9) + CANCHA MULTIPLE (5) + CANCHA VOLLEY (3) + GIMNASIO (7) + JUEGOS INFANTILES (6) + SALON DE JUEGOS (10) + SALON REC INFANTIL (3)</p>
+      <p>Prefijos: <code>DOT_CER_</code> <code>DOT_FT_</code> <code>DOT_MTO_</code> <code>DOT_ACT_</code> <code>DOT_FAC_</code></p>
+      <p style="color:var(--accent);">10 duplicados, 3 en carpeta equivocada, 7 JPGs, 3 HIELO sin contexto, 2 encoding roto, 1 fuera de contexto</p>
     </div>
 
     <!-- A.02 -->
     <div class="step-row completed" onclick="toggleStep('a02')">
       <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>A.02</strong><span>Dotaciones zona social 2</span></div>
-      <div class="step-files">27 archivos</div>
+      <div class="step-name"><strong>A.02</strong><span>Salones, Sendero, BBQ, Zona Canina</span></div>
+      <div class="step-files">27 archivos &middot; ~1 min</div>
       <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
     </div>
-    <div class="step-detail" id="a02">
-      <div class="detail-filter">
-        <input type="text" placeholder="Filtrar documentos..." oninput="filterTable(this,'a02-table')">
-        <span class="detail-count" id="a02-count">27 documentos</span>
-      </div>
-      <div class="detail-table-wrap">
-        <table class="detail-table" id="a02-table">
-          <thead><tr><th>#</th><th>Carpeta</th><th>Original</th><th>Nuevo</th><th>Obs</th></tr></thead>
-          <tbody>
-<tr><td>47</td><td>SALONES SOC/MTO</td><td>PLEGABLE-LIMPIEZA-WEB.pdf</td><td>DOT_MTO_PLEGABLE-LIMPIEZA-WEB.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>48</td><td>SALONES SOC/MTO</td><td>MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS.docx</td><td>DOT_MTO_MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS.docx</td><td><span class="obs-tag obs-warn">.docx</span></td></tr>
-<tr><td>49</td><td>SALONES SOC/MTO</td><td>MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS (2).pdf</td><td>DOT_MTO_MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS (2).pdf</td><td><span class="obs-tag obs-default">PDF del #48</span></td></tr>
-<tr><td>50</td><td>SALONES SOC/FT</td><td>225026250_FT_(N) MADERA NOGAL BEIGE.pdf</td><td>DOT_FT_225026250_FT_(N) MADERA NOGAL BEIGE.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>51</td><td>SALONES SOC/FT</td><td>13449 PUFF 2.pdf</td><td>DOT_FT_13449 PUFF 2.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>52</td><td>SALONES SOC/FT</td><td>Certificacion Legalidad Madera 2024 DEXCO.pdf</td><td>DOT_CER_Certificacion Legalidad Madera 2024 DEXCO.pdf</td><td><span class="obs-tag obs-default">Es CERTIFICADO</span></td></tr>
-<tr><td>53</td><td>SALONES SOC/FT</td><td>SOFA+PUFF (1).pdf</td><td>DOT_FT_SOFA+PUFF (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>54</td><td>SALONES SOC/FT</td><td>HIELO 3.pdf</td><td>DOT_FT_HIELO 3.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
-<tr><td>55</td><td>SALONES SOC/FT</td><td>HIELO 2.pdf</td><td>DOT_FT_HIELO 2.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
-<tr><td>56</td><td>SALONES SOC/FT</td><td>HIELO 1.pdf</td><td>DOT_FT_HIELO 1.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
-<tr><td>57</td><td>SALONES SOC/FT</td><td>9338 HOME GRIS 14.pdf</td><td>DOT_FT_9338 HOME GRIS 14.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>58</td><td>SALONES SOC/FT</td><td>8331 PUFF 1.pdf</td><td>DOT_FT_8331 PUFF 1.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>59</td><td>SALONES SOC/FT</td><td>9338 HOME GRIS 16.pdf</td><td>DOT_FT_9338 HOME GRIS 16.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>60</td><td>SALONES SOC/FT</td><td>16185 PUFF 3.pdf</td><td>DOT_FT_16185 PUFF 3.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>61</td><td>SALONES SOC/FT</td><td>9338 HOME GRIS 17.pdf</td><td>DOT_FT_9338 HOME GRIS 17.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>62</td><td>SALONES SOC/FT</td><td>Lavamanos ZC.pdf</td><td>DOT_FT_Lavamanos ZC.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>63</td><td>SENDERO/MTO</td><td>LB-INGES-DM55IC-MD19-CA14.pdf</td><td>DOT_MTO_LB-INGES-DM55IC-MD19-CA14.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
-<tr><td>64</td><td>SENDERO/CERT</td><td>LB-INGES-DM55IC-MD19-CA14.pdf</td><td>DOT_CER_LB-INGES-DM55IC-MD19-CA14.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #63</span></td></tr>
-<tr><td>65</td><td>SENDERO/FT</td><td>LB-INGES-DM55IC-MD19-CA14.pdf</td><td>DOT_FT_LB-INGES-DM55IC-MD19-CA14.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #63</span></td></tr>
-<tr><td>66</td><td>ZONA BBQ/CERT</td><td>GARANTIA BBQ A GAS FE-538 CONSTRUCTORA CAPITAL.pdf</td><td>DOT_CER_GARANTIA BBQ A GAS FE-538 CONSTRUCTORA CAPITAL.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>67</td><td>ZONA BBQ/FT</td><td>FICHA TECNICA BBQ CON MUEBLE INFERIOR 25C.pdf</td><td>DOT_FT_FICHA TECNICA BBQ CON MUEBLE INFERIOR 25C.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>68</td><td>ZONA BBQ/MTO</td><td>MANUAL BBQ A GAS 60CM CON MUEBLE ELEMENT HOUSE.pdf</td><td>DOT_MTO_MANUAL BBQ A GAS 60CM CON MUEBLE ELEMENT HOUSE.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>69</td><td>ZONA CANINA/MTO</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
-<tr><td>70</td><td>ZONA CANINA/FT</td><td>INFORME 025-2984 - 0007 CALIDAD BANCAS.pdf</td><td>DOT_INF_INFORME 025-2984 - 0007 CALIDAD BANCAS.pdf</td><td><span class="obs-tag obs-default">Es INFORME</span></td></tr>
-<tr><td>71</td><td>ZONA CANINA/FT</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #69</span></td></tr>
-<tr><td>72</td><td>ZONA CANINA/CERT</td><td>FICHA TECNICA M-31 LARGAS BANCAS.pdf</td><td>DOT_FT_FICHA TECNICA M-31 LARGAS BANCAS.pdf</td><td><span class="obs-tag obs-default">Es FT</span></td></tr>
-<tr><td>73</td><td>ZONA CANINA/CERT</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #69</span></td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="step-summary" id="a02">
+      <p>SALONES SOCIALES (16) + SENDERO TROTE (3) + ZONA BBQ (3) + ZONA CANINA (5)</p>
+      <p>Prefijos: <code>DOT_MTO_</code> <code>DOT_FT_</code> <code>DOT_CER_</code> <code>DOT_ACT_</code> <code>DOT_INF_</code></p>
+      <p style="color:var(--accent);">Sendero: mismo archivo x3 carpetas. Zona Canina: acta x3. 1 .docx, 3 HIELO sin contexto</p>
     </div>
 
     <!-- A.03 -->
     <div class="step-row completed" onclick="toggleStep('a03')">
       <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>A.03</strong><span>Dotaciones piscina, fichas y manuales</span></div>
-      <div class="step-files">57 archivos</div>
+      <div class="step-name"><strong>A.03</strong><span>Zona Humeda &mdash; Piscinas</span></div>
+      <div class="step-files">57 archivos &middot; ~3 min</div>
       <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
     </div>
-    <div class="step-detail" id="a03">
-      <div class="detail-filter">
-        <input type="text" placeholder="Filtrar documentos..." oninput="filterTable(this,'a03-table')">
-        <span class="detail-count" id="a03-count">57 documentos</span>
-      </div>
-      <div class="detail-table-wrap">
-        <table class="detail-table" id="a03-table">
-          <thead><tr><th>#</th><th>Carpeta</th><th>Original</th><th>Nuevo</th><th>Obs</th></tr></thead>
-          <tbody>
-<tr><td>74</td><td>CERTIFICADOS</td><td>GARANTIA EQUIPOS PISCINAS CAOBA.pdf</td><td>DOT_CER_GARANTIA EQUIPOS PISCINAS CAOBA.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>75</td><td>DOTACIONES</td><td>Carta de Garantia Constructora Capital - Caoba.docx.pdf</td><td>DOT_CER_Carta de Garantia Constructora Capital - Caoba.docx.pdf</td><td><span class="obs-tag obs-warn">Doble ext</span></td></tr>
-<tr><td>76</td><td>DOTACIONES</td><td>FICHA TECNICA AQ043D (1).pdf</td><td>DOT_FT_FICHA TECNICA AQ043D (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>77</td><td>DOTACIONES</td><td>Ficha Tecnica Macetas Thai.pdf</td><td>DOT_FT_Ficha Tecnica Macetas Thai.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>78</td><td>DOTACIONES</td><td>FICHA TECNICA Y MANTENIMIENTO M-121 CANACA EN ACERO.pdf</td><td>DOT_FT_FICHA TECNICA Y MANTENIMIENTO M-121 CANACA EN ACERO.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>79</td><td>DOTACIONES</td><td>FICHA TECNICA-MANUAL DE MTO Y GARANTIA PERCEPTUAL SILLAS Y MESAS.pdf</td><td>DOT_FT_FICHA TECNICA-MANUAL DE MTO Y GARANTIA PERCEPTUAL.pdf</td><td><span class="obs-tag obs-default">Doc mixto</span></td></tr>
-<tr><td>80</td><td>DOTACIONES</td><td>Recomendaciones de Uso Muebles Tramontina (2).pdf</td><td>DOT_MTO_Recomendaciones de Uso Muebles Tramontina (2).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
-<tr><td>81</td><td>FICHAS TEC/ZIP</td><td>MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td>DOT_FT_MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td><span class="obs-tag obs-dup">ZIP redundante</span></td></tr>
-<tr><td>82-105</td><td>FICHAS TEC/subfolder</td><td>24 PDFs (accesorios, bombeo, calefaccion, seguridad, sauna)</td><td>DOT_FT_ / DOT_MTO_ / DOT_ACT_</td><td><span class="obs-tag obs-dup">DUPLICADOS en MANUALES</span></td></tr>
-<tr><td>106</td><td>MANUALES/ZIP</td><td>MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td>DOT_FT_MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td><span class="obs-tag obs-dup">DUPLICADO #81</span></td></tr>
-<tr><td>107-130</td><td>MANUALES/subfolder</td><td>24 PDFs identicos a #82-105</td><td>DOT_FT_ / DOT_MTO_ / DOT_ACT_</td><td><span class="obs-tag obs-dup">DUPLICADOS EXACTOS</span></td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="step-summary" id="a03">
+      <p>Certificados (1) + Dotaciones (7) + Fichas T&eacute;cnicas/ZIP (25) + Manuales/ZIP (24)</p>
+      <p>Prefijos: <code>DOT_CER_</code> <code>DOT_FT_</code> <code>DOT_MTO_</code> <code>DOT_ACT_</code></p>
+      <p style="color:var(--accent);">25 duplicados exactos (fichas = manuales), 2 ZIPs redundantes, 1 doble ext .docx.pdf. Permisos corregidos con chmod</p>
     </div>
 
   </div>
@@ -980,34 +872,129 @@ footer {
 <div class="hallazgos-section">
   <div class="section-title">
     Hallazgos del Diagnostico
-    <span class="count-badge">89 detectados</span>
+    <span class="count-badge">267 copias eliminables &middot; 188 nombres duplicados</span>
   </div>
-  <div class="hallazgos-grid">
-    <div class="hallazgo-card">
-      <div class="h-title" style="color:var(--warning);">Duplicados</div>
-      <div class="h-value" style="color:var(--warning);">~51</div>
-      <div class="h-desc">Archivos identicos en multiples carpetas</div>
-      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:57%;background:var(--warning);"></div></div>
+
+  <!-- DUPLICADOS -->
+  <div class="phase" id="hallDup">
+    <div class="phase-header" onclick="togglePhase('hallDup')">
+      <span class="phase-badge" style="background:rgba(250,204,21,.15);color:var(--warning);">DUPLICADOS</span>
+      <span class="phase-title">Archivos identicos en multiples carpetas</span>
+      <span class="phase-meta">267 copias de 188 archivos</span>
+      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
     </div>
-    <div class="hallazgo-card">
-      <div class="h-title" style="color:var(--accent);">Mal clasificados</div>
-      <div class="h-value" style="color:var(--accent);">~22</div>
-      <div class="h-desc">Archivos en carpetas incorrectas (ej: FT en CERT)</div>
-      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:25%;background:var(--accent);"></div></div>
-    </div>
-    <div class="hallazgo-card">
-      <div class="h-title" style="color:#60A5FA;">Formato no estandar</div>
-      <div class="h-value" style="color:#60A5FA;">11</div>
-      <div class="h-desc">JPG, DOCX, doble extension, encoding roto</div>
-      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:16%;background:#60A5FA;"></div></div>
-    </div>
-    <div class="hallazgo-card">
-      <div class="h-title" style="color:var(--muted);">Sin contexto</div>
-      <div class="h-value" style="color:var(--muted);">8</div>
-      <div class="h-desc">Archivos sin relacion clara (HIELO, Ventaneria)</div>
-      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:12%;background:var(--muted);"></div></div>
+    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
+      <p style="color:var(--muted);margin-bottom:12px;">Top 20 archivos con mas copias. Accion: dejar 1 copia y eliminar las demas.</p>
+      <table class="detail-table">
+        <thead><tr><th>Archivo</th><th>Copias</th><th>Ubicacion</th></tr></thead>
+        <tbody>
+<tr><td>MEC_MTO_MANUAL ASCENSOR.pdf</td><td style="color:var(--warning);font-weight:700;">19</td><td>ASCENSORES &mdash; en cada torre (deberia estar 1 vez)</td></tr>
+<tr><td>DOT_FT_MANTO ROOFER 3500.pdf</td><td style="color:var(--warning);font-weight:700;">18</td><td>IMPERMEAB CUBIERTAS &mdash; copia en cada torre</td></tr>
+<tr><td>DOT_FT_impac-5000.pdf</td><td style="color:var(--warning);font-weight:700;">18</td><td>IMPERMEAB CUBIERTAS &mdash; copia en cada torre</td></tr>
+<tr><td>DOT_CER_GARANTIA CAOBA.pdf</td><td style="color:var(--warning);font-weight:700;">12</td><td>IMPERMEAB FACHADAS &mdash; copia en 12 torres</td></tr>
+<tr><td>MEC_CER_CARTA RETIE CAOBA ETAPA 2 TORRES 1-5.pdf</td><td>5</td><td>ASCENSORES Torres 1-5</td></tr>
+<tr><td>MEC_CER_Carta Ministerio Minas RETIE T.1.2.3.4.pdf</td><td>5</td><td>ASCENSORES Torres 1-4</td></tr>
+<tr><td>DOT_MTO_MANUALGMCARPINTEROS CAOBA.pdf</td><td>4</td><td>CARP. MADERA (Muebles + Puertas) + DOTACION</td></tr>
+<tr><td>DOT_FT_604602221-piso-pared-vancouver-hielo.pdf</td><td>4</td><td>PISOS (banos cert + banos manual + recepcion cert + recepcion manual)</td></tr>
+<tr><td>RCI_MTO_Manual Puertas V6.0 enero 2022.pdf</td><td>3</td><td>CARP METALICA PCF + CARP METALICA</td></tr>
+<tr><td>RCI_FT_FICHA TECNICA PCF FEB 2024 PUERTAS.pdf</td><td>3</td><td>CARP METALICA PCF (cert calidad + cert garantia + manual)</td></tr>
+<tr><td>RCI_CER_CERTIFICACION PCF 1 R3791 UL.pdf</td><td>3</td><td>CARP METALICA PCF (cert calidad + cert garantia)</td></tr>
+<tr><td>MEC_CER_CARTA RETIE CAOBA TORRES 14-15-16.pdf</td><td>3</td><td>ASCENSORES Torres 14, 15, 16</td></tr>
+<tr><td>ELE_CER_Subestacion.pdf</td><td>3</td><td>SUBESTACION (6 subcarpetas, mismo PDF)</td></tr>
+<tr><td>ELE_ACT_ACTA CIUDADELA NOVATERRA T.1.3.4.pdf</td><td>3</td><td>MEDIDORES Torres 1, 3, 4</td></tr>
+<tr><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td>3</td><td>JUEGOS INFANTILES (cert + ft + manual)</td></tr>
+<tr><td>DOT_ACT_ACTA ENTREGA MUELLES OBRA CAOBA.pdf</td><td>3</td><td>JUEGOS INFANTILES (cert + ft + manual)</td></tr>
+<tr><td>DOT_ACT_ACTA ENTREGA ZONA MASCOTAS.pdf</td><td>3</td><td>ZONA CANINA (mto + ft + cert)</td></tr>
+<tr><td>HID_MTO_MANUAL OPERACION IACOL BOMBEO 2024.pdf</td><td>2</td><td>HIDRAULICA (equipo presion + sub-drenaje)</td></tr>
+<tr><td>HID_FT_FICHA TECNICA TABLERO JOCKEY 3HP.pdf</td><td>2</td><td>HIDRAULICA (equipo presion + sub-drenaje)</td></tr>
+<tr><td>DOT_FT_MANUALES Y FT CAOBA (2).zip</td><td>2</td><td>ZONA HUMEDA (fichas tecnicas + manuales) &mdash; ZIP redundante</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
+
+  <!-- FORMATO -->
+  <div class="phase" id="hallFmt">
+    <div class="phase-header" onclick="togglePhase('hallFmt')">
+      <span class="phase-badge" style="background:rgba(96,165,250,.15);color:#60A5FA;">FORMATO</span>
+      <span class="phase-title">Archivos con formato no estandar</span>
+      <span class="phase-meta">15 archivos</span>
+      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
+      <table class="detail-table">
+        <thead><tr><th>Archivo</th><th>Problema</th><th>Ubicacion</th></tr></thead>
+        <tbody>
+<tr><td>DOT_FT_FICHA TECNICA PATIN (CAMINADOR AEREO).jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_FICHA TECNICA COLUMPIO.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_FICHA TECNICA VOLANTE.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_FICHA TECNICA TUMBONA.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_FICHA TECNICA BARRAS.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_FICHA TECNICA TWISTER.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_FICHA TECNICA SURF.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
+<tr><td>DOT_FT_Ficha T&Atilde;&copy;cnica Mesa de Billar Pool (1).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td><td>SALON DE JUEGOS</td></tr>
+<tr><td>DOT_FT_Ficha T&Atilde;&copy;cnica Mesa de Ping Pong (2).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td><td>SALON DE JUEGOS</td></tr>
+<tr><td>DOT_MTO_MANUAL DE USO Y MTO PUERTAS.docx</td><td><span class="obs-tag obs-warn">.docx</span></td><td>SALONES SOCIALES (ya existe .pdf)</td></tr>
+<tr><td>EST_PLN_Plano Gancho mantenimiento.pdf.pdf</td><td><span class="obs-tag obs-warn">Doble ext</span></td><td>GANCHOS</td></tr>
+<tr><td>DOT_CER_Carta Garantia Caoba.docx.pdf</td><td><span class="obs-tag obs-warn">Doble ext</span></td><td>ZONA HUMEDA</td></tr>
+<tr><td>DOT_FT_MANUALES Y FT CAOBA (2).zip</td><td><span class="obs-tag obs-warn">ZIP redundante</span></td><td>ZONA HUMEDA / Fichas Tecnicas</td></tr>
+<tr><td>DOT_FT_MANUALES Y FT CAOBA (2).zip</td><td><span class="obs-tag obs-warn">ZIP redundante</span></td><td>ZONA HUMEDA / Manuales</td></tr>
+<tr><td>JUR_MTO_20250520CA_MZCNE 1.xlsx</td><td><span class="obs-tag obs-warn">.xlsx</span></td><td>Manual del Administrador</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SIN CONTEXTO -->
+  <div class="phase" id="hallCtx">
+    <div class="phase-header" onclick="togglePhase('hallCtx')">
+      <span class="phase-badge" style="background:rgba(136,136,160,.15);color:var(--muted);">SIN CONTEXTO</span>
+      <span class="phase-title">Archivos sin nombre descriptivo o fuera de lugar</span>
+      <span class="phase-meta">7 archivos</span>
+      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
+      <table class="detail-table">
+        <thead><tr><th>Archivo</th><th>Problema</th><th>Ubicacion</th></tr></thead>
+        <tbody>
+<tr><td>DOT_FT_HIELO 1.pdf</td><td><span class="obs-tag obs-default">Nombre sin contexto</span></td><td>SALON DE JUEGOS + SALONES SOCIALES</td></tr>
+<tr><td>DOT_FT_HIELO 2.pdf</td><td><span class="obs-tag obs-default">Nombre sin contexto</span></td><td>SALON DE JUEGOS + SALONES SOCIALES</td></tr>
+<tr><td>DOT_FT_HIELO 3.pdf</td><td><span class="obs-tag obs-default">Nombre sin contexto</span></td><td>SALON DE JUEGOS + SALONES SOCIALES</td></tr>
+<tr><td>DOT_CER_Ventaneria.pdf</td><td><span class="obs-tag obs-default">Fuera de contexto</span></td><td>GIMNASIO / Certificados (no pertenece a gimnasio)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CARPETAS VACIAS -->
+  <div class="phase" id="hallEmpty">
+    <div class="phase-header" onclick="togglePhase('hallEmpty')">
+      <span class="phase-badge" style="background:rgba(201,102,79,.15);color:var(--accent);">VACIAS</span>
+      <span class="phase-title">Carpetas sin documentos</span>
+      <span class="phase-meta">Documentacion faltante o pendiente</span>
+      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
+      <p style="color:var(--muted);margin-bottom:12px;">Carpetas que existen en la estructura pero no contienen archivos. Puede indicar documentacion no entregada por la constructora.</p>
+      <table class="detail-table">
+        <thead><tr><th>Carpeta</th><th>Sistema</th></tr></thead>
+        <tbody>
+<tr><td>7. SERVIDUMBRE ENEL</td><td>Juridico/Legal</td></tr>
+<tr><td>CERTIFICACION RETILAP</td><td>Electrico</td></tr>
+<tr><td>CERTIFICACION RITEL (Torres 1-18)</td><td>Electrico &mdash; 18 torres sin certificacion</td></tr>
+<tr><td>RETIE Torres 5, 12, 17, 18</td><td>Electrico &mdash; 4 torres sin certificacion</td></tr>
+<tr><td>CUBIERTAS en vidrio / claraboyas (cert + manual)</td><td>Arquitectonico</td></tr>
+<tr><td>Equipos a gas ZC (manual + cert + ficha)</td><td>Gas</td></tr>
+<tr><td>Ascensores Torre 6 y 7 (cert ONAC + actas arranque)</td><td>Electromecanico</td></tr>
+<tr><td>Deteccion incendio (manual + acta + cert garantia)</td><td>Seguridad</td></tr>
+<tr><td>Citofonia (manual + ficha tecnica)</td><td>Seguridad</td></tr>
+<tr><td>Extintores (ficha + certificado)</td><td>Seguridad</td></tr>
+<tr><td>Tanques (impermeab + garantia + ficha + manual mto)</td><td>Hidraulico</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
 
 <!-- TOKEN CHART -->
