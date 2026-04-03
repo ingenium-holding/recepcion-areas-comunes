@@ -33,8 +33,25 @@ body {
 
 .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
 
+/* BACK LINK */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: .85rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: color .2s ease, background .2s ease;
+}
+.back-link:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
 /* HEADER */
-header { text-align: center; padding: 40px 0 32px; }
+header { text-align: center; padding: 28px 0 32px; }
 header h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -451,6 +468,9 @@ footer {
 </head>
 <body>
 <div class="container">
+
+<!-- BACK NAV -->
+<a href="../" class="back-link">&larr; Todos los proyectos</a>
 
 <!-- HEADER -->
 <header>
