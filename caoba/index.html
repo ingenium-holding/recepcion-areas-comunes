@@ -482,20 +482,20 @@ footer {
 <!-- KPI CARDS -->
 <div class="kpi-grid">
   <div class="kpi highlight">
-    <div class="value c-primary">47.4%</div>
+    <div class="value c-primary">100%</div>
     <div class="label">Progreso General</div>
-    <div class="sub">924 de 1,951 docs</div>
+    <div class="sub">1,951 de 1,951 docs</div>
   </div>
   <div class="kpi">
-    <div class="value">20<span style="font-size:.9rem;color:var(--muted)">/44</span></div>
+    <div class="value">25<span style="font-size:.9rem;color:var(--muted)">/44</span></div>
     <div class="label">Pasos Ejecutados</div>
   </div>
   <div class="kpi">
-    <div class="value">~25<span style="font-size:.8rem;color:var(--muted)"> min</span></div>
+    <div class="value">~30<span style="font-size:.8rem;color:var(--muted)"> min</span></div>
     <div class="label">Tiempo Invertido</div>
   </div>
   <div class="kpi">
-    <div class="value">108K</div>
+    <div class="value">124K</div>
     <div class="label">Tokens Consumidos</div>
   </div>
   <div class="kpi">
@@ -511,11 +511,11 @@ footer {
 <!-- GLOBAL PROGRESS -->
 <div class="progress-section">
   <div class="progress-track">
-    <div class="progress-fill" style="width:47.4%"></div>
+    <div class="progress-fill" style="width:100%"></div>
   </div>
   <div class="progress-stats">
-    <span><strong>924</strong> procesados</span>
-    <span><strong>1,027</strong> pendientes</span>
+    <span><strong>1,951</strong> procesados</span>
+    <span><strong>0</strong> pendientes</span>
     <span><strong>1,951</strong> total</span>
   </div>
 </div>
@@ -864,11 +864,11 @@ footer {
 <!-- FASE C -->
 <div class="phase" id="phaseC">
   <div class="phase-header" onclick="togglePhase('phaseC')">
-    <span class="phase-badge badge-b">FASE C</span>
+    <span class="phase-badge badge-a">FASE C</span>
     <span class="phase-title">Bienes Esenciales</span>
     <span class="phase-meta">1,178 archivos</span>
-    <div class="phase-mini-bar"><div class="phase-mini-fill fill-primary" style="width:12.8%"></div></div>
-    <span class="phase-pct" style="color:var(--primary)">12.8%</span>
+    <div class="phase-mini-bar"><div class="phase-mini-fill fill-success" style="width:100%"></div></div>
+    <span class="phase-pct c-success">100%</span>
     <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
   </div>
   <div class="phase-body">
@@ -919,34 +919,58 @@ footer {
       <p style="margin-top:6px;color:var(--accent);">Hallazgos: 30 duplicados masivos (impac-5000 y MANTO ROOFER copiados en cada torre)</p>
     </div>
     <!-- C3.02 -->
-    <div class="step-row pending">
-      <div class="step-icon wait"></div>
-      <div class="step-name"><strong>C3.02</strong><span>Impermeabilizaciones (2)</span></div>
-      <div class="step-files">25 archivos</div>
+    <div class="step-row completed" onclick="toggleStep('c302')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C3.02</strong><span>Impermeab Cubiertas T16-18 + Fachadas</span></div>
+      <div class="step-files">25 archivos &middot; ~1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c302">
+      <p>9 Cubiertas T16-18 + 15 Fachadas cert + 1 Fachadas manual. GARANTIA CAOBA.pdf repetido en 13 torres.</p>
     </div>
     <!-- C4.01 -->
-    <div class="step-row pending">
-      <div class="step-icon wait"></div>
+    <div class="step-row completed" onclick="toggleStep('c401')">
+      <div class="step-icon done">&#10003;</div>
       <div class="step-name"><strong>C4.01</strong><span>Pisos + Red Contra Incendio</span></div>
-      <div class="step-files">37 archivos</div>
+      <div class="step-files">37 archivos &middot; ~2 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
     </div>
-    <!-- C5 (16 pasos) -->
-    <div class="step-row pending">
-      <div class="step-icon wait"></div>
-      <div class="step-name"><strong>C5.01&ndash;C5.16</strong><span>Red Electrica (16 lotes)</span></div>
-      <div class="step-files">769 archivos</div>
+    <div class="step-summary" id="c401">
+      <p>7 Pisos: 604602221 duplicado x4. 30 RCI: cert UL/FM, especificaciones, bombas, tanques.</p>
+    </div>
+    <!-- C5 -->
+    <div class="step-row completed" onclick="toggleStep('c5all')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C5.ALL</strong><span>Red Electrica (16 pasos &rarr; 1 bulk)</span></div>
+      <div class="step-files">769 archivos &middot; ~2 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c5all">
+      <p>729 RETIE/RITEL: bulk <code>ELE_CER_</code> en 1 comando</p>
+      <p>40 variados: apantallamiento, lamparas, medidores, planta electrica, subestacion, tuberia</p>
+      <p style="color:var(--accent);">Optimizacion: 16 pasos planeados ejecutados en 1. Ahorro ~48,000 tokens.</p>
     </div>
     <!-- C6 -->
-    <div class="step-row pending">
-      <div class="step-icon wait"></div>
-      <div class="step-name"><strong>C6.01&ndash;C6.02</strong><span>Red Gas + Hidraulica</span></div>
-      <div class="step-files">63 archivos</div>
+    <div class="step-row completed" onclick="toggleStep('c6all')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C6.ALL</strong><span>Red Gas + Hidraulica (2 pasos &rarr; 1)</span></div>
+      <div class="step-files">63 archivos &middot; ~1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c6all">
+      <p>32 Gas: actas conexion medidores por torre (T9 tiene 21 medidores individuales)</p>
+      <p>31 Hidraulica: equipos presion, eyectoras, tanques, certificados RETIE bombas</p>
     </div>
     <!-- C7 -->
-    <div class="step-row pending">
-      <div class="step-icon wait"></div>
-      <div class="step-name"><strong>C7.01&ndash;C7.03</strong><span>Seguridad + Ascensores</span></div>
-      <div class="step-files">133 archivos</div>
+    <div class="step-row completed" onclick="toggleStep('c7all')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C7.ALL</strong><span>Seguridad + Ascensores (3 pasos &rarr; 1)</span></div>
+      <div class="step-files">133 archivos &middot; ~1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c7all">
+      <p>14 Seguridad: talanqueras, senalizacion, citofonia</p>
+      <p>119 Ascensores: garantias y actas de entrega por torre (18 torres x ~6-7 docs)</p>
     </div>
 
   </div>
@@ -1091,9 +1115,34 @@ footer {
         <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
         <div class="bar-label">C3.01</div>
       </div>
+      <div class="bar-group">
+        <div class="bar-value">3K</div>
+        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C3.02</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">3K</div>
+        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C4.01</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C5.ALL</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">3K</div>
+        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C6.ALL</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">3K</div>
+        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C7.ALL</div>
+      </div>
     </div>
     <div style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--muted);">
-      Total acumulado: <strong style="color:var(--text);">108K tokens</strong> &middot; Promedio por paso: <strong style="color:var(--text);">5.4K</strong>
+      Total acumulado: <strong style="color:var(--text);">124K tokens</strong> &middot; Promedio por paso: <strong style="color:var(--text);">5.0K</strong>
     </div>
   </div>
 </div>
