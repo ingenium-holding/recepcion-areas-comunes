@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingenium Holding — Recepcion de Areas Comunes</title>
+<style>
+:root {
+  --primary: #9600C1;
+  --dark: #420049;
+  --accent: #C9664F;
+  --bg: #0D0D12;
+  --surface: #16161F;
+  --surface2: #1E1E2A;
+  --text: #E8E8F0;
+  --muted: #8888A0;
+  --success: #4ADE80;
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* HEADER */
+header { text-align: center; padding: 60px 0 48px; }
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .01em;
+  line-height: 1.2;
+}
+header .subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-top: 12px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* DIVIDER */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 2px;
+  margin: 0 auto 48px;
+}
+
+/* SERVICE DESC */
+.service-desc {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 48px;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.8;
+}
+
+/* PROJECT CARDS */
+.projects-title {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.project-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid #2a2a3a;
+  border-radius: var(--radius);
+  padding: 28px 28px 24px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+  border-color: rgba(150,0,193,.4);
+}
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.project-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.project-status {
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.status-active {
+  background: rgba(150,0,193,.15);
+  color: #c88aec;
+}
+.status-complete {
+  background: rgba(74,222,128,.12);
+  color: var(--success);
+}
+.project-meta {
+  display: flex;
+  gap: 24px;
+  font-size: .82rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.project-meta span strong { color: var(--text); }
+.project-progress-track {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.project-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--dark), var(--primary), var(--accent));
+  transition: width 1s ease;
+}
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.project-arrow {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: .85rem;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 48px 0 20px;
+  color: #555570;
+  font-size: .75rem;
+  border-top: 1px solid #1a1a2a;
+  margin-top: 60px;
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--text); }
+
+@media (max-width: 640px) {
+  header h1 { font-size: 1.6rem; }
+  .project-meta { gap: 12px; }
+  .project-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="logo-text">Ingenium Holding</div>
+  <h1>Recepcion de Areas Comunes</h1>
+  <p class="subtitle">Consultoria profesional para la verificacion y acompanamiento en el recibo de zonas comunes en Propiedad Horizontal</p>
+</header>
+
+<div class="divider"></div>
+
+<div class="service-desc">
+  Verificamos que las areas comunes entregadas por la constructora cumplan con las especificaciones
+  contractuales, normativas vigentes (NSR-10, RETIE, RETILAP, RAS, NTC 1500, Ley 675) y estandares
+  de calidad. Cada proyecto incluye diagnostico documental, inspecciones de campo, informe
+  tecnico-juridico y acompanamiento a correcciones.
+</div>
+
+<div class="projects-title">Proyectos Activos</div>
+
+<!-- CAOBA -->
+<a href="caoba/" class="project-card">
+  <div class="project-header">
+    <div class="project-name">Caoba de Novaterra P.H.</div>
+    <span class="project-status status-active">EN CURSO</span>
+  </div>
+  <div class="project-meta">
+    <span>Ubicacion: <strong>Mosquera, Cundinamarca</strong></span>
+    <span>Documentos: <strong>1,951</strong></span>
+    <span>Fase: <strong>Organizacion documental</strong></span>
+  </div>
+  <div class="project-progress-track">
+    <div class="project-progress-fill" style="width:44.8%"></div>
+  </div>
+  <div class="project-footer">
+    <span>44.8% completado &mdash; 874 de 1,951 documentos procesados</span>
+    <span class="project-arrow">Ver dashboard &rarr;</span>
+  </div>
+</a>
+
+</div>
+
+<footer>
+  <p><strong>Ingenium Holding Corp SAS</strong> &mdash; NIT 901.180.391-4</p>
+  <p style="margin-top:6px;"><a href="https://ingeniumholding.co" target="_blank">ingeniumholding.co</a></p>
+</footer>
+
+</body>
+</html>

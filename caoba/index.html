@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAOBA — Dashboard de Progreso</title>
+<style>
+:root {
+  --primary: #9600C1;
+  --dark: #420049;
+  --accent: #C9664F;
+  --bg: #0D0D12;
+  --surface: #16161F;
+  --surface2: #1E1E2A;
+  --text: #E8E8F0;
+  --muted: #8888A0;
+  --success: #4ADE80;
+  --pending: #555570;
+  --warning: #FACC15;
+  --radius: 10px;
+  --transition: .25s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+
+/* HEADER */
+header { text-align: center; padding: 40px 0 32px; }
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .02em;
+}
+header .subtitle { color: var(--muted); font-size: .95rem; margin-top: 6px; }
+header .date {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: .8rem;
+  color: var(--muted);
+  background: var(--surface);
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid #2a2a3a;
+}
+
+/* KPI CARDS */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.kpi {
+  background: var(--surface);
+  border: 1px solid #2a2a3a;
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+.kpi.highlight {
+  background: linear-gradient(135deg, rgba(150,0,193,.15), rgba(201,102,79,.10));
+  border-color: rgba(150,0,193,.35);
+}
+.kpi .value { font-size: 1.7rem; font-weight: 700; margin-bottom: 2px; }
+.kpi .label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.kpi .sub { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+.c-primary { color: var(--primary); }
+.c-accent { color: var(--accent); }
+.c-success { color: var(--success); }
+
+/* GLOBAL PROGRESS */
+.progress-section { margin-bottom: 36px; }
+.progress-track {
+  height: 14px;
+  background: var(--surface2);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 7px;
+  background: linear-gradient(90deg, var(--dark), var(--primary), var(--accent));
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  transition: width 1s ease;
+}
+@keyframes shimmer {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.progress-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 10px;
+  font-size: .82rem;
+  color: var(--muted);
+}
+.progress-stats span strong { color: var(--text); }
+
+/* PHASE SECTIONS */
+.phase {
+  background: var(--surface);
+  border: 1px solid #2a2a3a;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition);
+}
+.phase-header:hover { background: rgba(255,255,255,.02); }
+.phase-badge {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: .04em;
+}
+.badge-a { background: rgba(74,222,128,.15); color: var(--success); }
+.badge-b { background: rgba(150,0,193,.18); color: #c88aec; }
+.badge-c { background: rgba(85,85,112,.2); color: var(--pending); }
+.phase-title { font-weight: 600; font-size: .95rem; flex: 1; }
+.phase-meta { font-size: .75rem; color: var(--muted); white-space: nowrap; }
+.phase-mini-bar {
+  width: 80px;
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.phase-mini-fill { height: 100%; border-radius: 3px; transition: width .6s ease; }
+.fill-success { background: var(--success); }
+.fill-primary { background: var(--primary); }
+.fill-pending { background: var(--pending); }
+.phase-pct { font-size: .82rem; font-weight: 600; min-width: 40px; text-align: right; }
+.phase-chevron {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition);
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.phase.open .phase-chevron { transform: rotate(180deg); }
+.phase-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease, padding .3s ease;
+  padding: 0 20px;
+}
+.phase.open .phase-body {
+  max-height: 8000px;
+  padding: 0 20px 16px;
+}
+
+/* STEP ROWS */
+.step-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  font-size: .85rem;
+  transition: background var(--transition);
+}
+.step-row.completed { cursor: pointer; }
+.step-row.completed:hover { background: rgba(255,255,255,.03); }
+.step-row.pending { opacity: .45; }
+.step-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .65rem;
+  flex-shrink: 0;
+}
+.step-icon.done { background: rgba(74,222,128,.15); color: var(--success); }
+.step-icon.wait { background: rgba(85,85,112,.2); color: var(--pending); border: 1.5px solid var(--pending); }
+.step-name { flex: 1; }
+.step-name strong { color: var(--text); }
+.step-name span { color: var(--muted); margin-left: 6px; }
+.step-files { font-size: .75rem; color: var(--muted); white-space: nowrap; }
+.step-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+.step-row.expanded .step-chevron { transform: rotate(180deg); }
+
+/* DETAIL PANEL */
+.step-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease, padding .3s ease;
+  padding: 0 0 0 28px;
+}
+.step-detail.open {
+  max-height: 3000px;
+  padding: 12px 0 12px 28px;
+}
+
+.detail-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.detail-filter input {
+  background: var(--surface2);
+  border: 1px solid #2a2a3a;
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: var(--text);
+  font-size: .8rem;
+  width: 260px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.detail-filter input:focus { border-color: var(--primary); }
+.detail-filter input::placeholder { color: var(--pending); }
+.detail-count { font-size: .72rem; color: var(--muted); }
+
+.detail-table-wrap {
+  max-height: 420px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid #2a2a3a;
+}
+.detail-table-wrap::-webkit-scrollbar { width: 6px; }
+.detail-table-wrap::-webkit-scrollbar-track { background: var(--surface); }
+.detail-table-wrap::-webkit-scrollbar-thumb { background: #3a3a4a; border-radius: 3px; }
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .78rem;
+}
+.detail-table th {
+  position: sticky;
+  top: 0;
+  background: var(--surface2);
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #2a2a3a;
+  z-index: 1;
+}
+.detail-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(42,42,58,.4);
+  vertical-align: top;
+  max-width: 280px;
+  word-break: break-word;
+}
+.detail-table tr:nth-child(even) td { background: rgba(255,255,255,.01); }
+.detail-table tr:nth-child(odd) td { background: rgba(0,0,0,.1); }
+.detail-table tr:hover td { background: rgba(150,0,193,.05); }
+
+.obs-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: .7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.obs-ok { background: rgba(74,222,128,.12); color: var(--success); }
+.obs-dup { background: rgba(250,204,21,.12); color: var(--warning); }
+.obs-warn { background: rgba(201,102,79,.15); color: var(--accent); }
+.obs-default { background: rgba(136,136,160,.1); color: var(--muted); }
+
+/* SUMMARY ROW (for B steps) */
+.step-summary {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 14px 0 28px;
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.7;
+  transition: max-height .4s ease, padding .3s ease;
+}
+.step-summary.open {
+  max-height: 500px;
+  padding: 10px 14px 10px 28px;
+}
+.step-summary code {
+  background: var(--surface2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: .75rem;
+  color: var(--text);
+}
+
+/* HALLAZGOS */
+.hallazgos-section { margin: 36px 0; }
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title .count-badge {
+  font-size: .72rem;
+  background: rgba(201,102,79,.15);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.hallazgos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.hallazgo-card {
+  background: var(--surface);
+  border: 1px solid #2a2a3a;
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.hallazgo-card .h-title {
+  font-size: .82rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.hallazgo-card .h-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.hallazgo-card .h-desc {
+  font-size: .72rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.hallazgo-bar {
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 2px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.hallazgo-bar-fill { height: 100%; border-radius: 2px; }
+
+/* TOKEN CHART */
+.token-section { margin: 36px 0; }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid #2a2a3a;
+  border-radius: var(--radius);
+  padding: 24px 20px;
+}
+.bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 160px; padding-top: 10px; }
+.bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+.bar {
+  width: 100%;
+  max-width: 60px;
+  border-radius: 5px 5px 0 0;
+  min-height: 4px;
+}
+.bar-label { font-size: .65rem; color: var(--muted); text-align: center; white-space: nowrap; }
+.bar-value { font-size: .7rem; font-weight: 600; color: var(--text); }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 0 20px;
+  color: var(--pending);
+  font-size: .75rem;
+  border-top: 1px solid #1a1a2a;
+  margin-top: 40px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .container { padding: 16px 12px 40px; }
+  header h1 { font-size: 1.5rem; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .kpi .value { font-size: 1.3rem; }
+  .phase-header { padding: 12px 14px; gap: 8px; flex-wrap: wrap; }
+  .phase-mini-bar { width: 60px; }
+  .progress-stats { flex-wrap: wrap; gap: 16px; }
+  .bar-chart { gap: 6px; }
+  .detail-filter input { width: 100%; }
+  .hallazgos-grid { grid-template-columns: 1fr; }
+  .detail-table { font-size: .7rem; }
+  .step-detail.open { padding-left: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header>
+  <h1>CAOBA de Novaterra P.H.</h1>
+  <div class="subtitle">Diagnostico Documental &mdash; Organizacion y Clasificacion con Prefijos</div>
+  <div class="date">03 Abr 2026</div>
+</header>
+
+<!-- KPI CARDS -->
+<div class="kpi-grid">
+  <div class="kpi highlight">
+    <div class="value c-primary">44.8%</div>
+    <div class="label">Progreso General</div>
+    <div class="sub">874 de 1,951 docs</div>
+  </div>
+  <div class="kpi">
+    <div class="value">19<span style="font-size:.9rem;color:var(--muted)">/44</span></div>
+    <div class="label">Pasos Ejecutados</div>
+  </div>
+  <div class="kpi">
+    <div class="value">~22<span style="font-size:.8rem;color:var(--muted)"> min</span></div>
+    <div class="label">Tiempo Invertido</div>
+  </div>
+  <div class="kpi">
+    <div class="value">104K</div>
+    <div class="label">Tokens Consumidos</div>
+  </div>
+  <div class="kpi">
+    <div class="value c-accent">89</div>
+    <div class="label">Hallazgos</div>
+  </div>
+  <div class="kpi">
+    <div class="value c-success">2<span style="font-size:.9rem;color:var(--muted)">/3</span></div>
+    <div class="label">Fases Completadas</div>
+  </div>
+</div>
+
+<!-- GLOBAL PROGRESS -->
+<div class="progress-section">
+  <div class="progress-track">
+    <div class="progress-fill" style="width:44.8%"></div>
+  </div>
+  <div class="progress-stats">
+    <span><strong>874</strong> procesados</span>
+    <span><strong>1,077</strong> pendientes</span>
+    <span><strong>1,951</strong> total</span>
+  </div>
+</div>
+
+<!-- FASE A -->
+<div class="phase open" id="phaseA">
+  <div class="phase-header" onclick="togglePhase('phaseA')">
+    <span class="phase-badge badge-a">FASE A</span>
+    <span class="phase-title">Bienes No Esenciales</span>
+    <span class="phase-meta">130 archivos</span>
+    <div class="phase-mini-bar"><div class="phase-mini-fill fill-success" style="width:100%"></div></div>
+    <span class="phase-pct c-success">100%</span>
+    <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+  </div>
+  <div class="phase-body">
+
+    <!-- A.01 -->
+    <div class="step-row completed" onclick="toggleStep('a01')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>A.01</strong><span>Dotaciones zona social 1</span></div>
+      <div class="step-files">46 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-detail" id="a01">
+      <div class="detail-filter">
+        <input type="text" placeholder="Filtrar documentos..." oninput="filterTable(this,'a01-table')">
+        <span class="detail-count" id="a01-count">46 documentos</span>
+      </div>
+      <div class="detail-table-wrap">
+        <table class="detail-table" id="a01-table">
+          <thead><tr><th>#</th><th>Carpeta</th><th>Original</th><th>Nuevo</th><th>Obs</th></tr></thead>
+          <tbody>
+<tr><td>1</td><td>BICICLETEROS/FICHA TEC</td><td>CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td>DOT_CER_CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
+<tr><td>2</td><td>BICICLETEROS/CERTIFICADO</td><td>CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td>DOT_CER_CARTA GARANTIA CAOBA 22-05-2025 (1).pdf</td><td><span class="obs-tag obs-dup">DUPLICADO</span></td></tr>
+<tr><td>3</td><td>BICICLETEROS/MANUAL</td><td>CARTA GARANTIA CAOBA 22-05-2025 (18).pdf</td><td>DOT_CER_CARTA GARANTIA CAOBA 22-05-2025 (18).pdf</td><td><span class="obs-tag obs-default">Es certificado</span></td></tr>
+<tr><td>4</td><td>BIOSALUDABLES/CERT</td><td>manual de mantenimiento y garantia biosaludables (1).pdf</td><td>DOT_CER_manual de mantenimiento y garantia biosaludables (1).pdf</td><td><span class="obs-tag obs-default">Garantia+manual</span></td></tr>
+<tr><td>5</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA PATIN (CAMINADOR AEREO).jpg</td><td>DOT_FT_FICHA TECNICA PATIN (CAMINADOR AEREO).jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>6</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA COLUMPIO (EXTENCION DE PIERNAS).jpg</td><td>DOT_FT_FICHA TECNICA COLUMPIO (EXTENCION DE PIERNAS).jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>7</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA VOLANTE.jpg</td><td>DOT_FT_FICHA TECNICA VOLANTE.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>8</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA TUMBONA.jpg</td><td>DOT_FT_FICHA TECNICA TUMBONA.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>9</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA BARRAS.jpg</td><td>DOT_FT_FICHA TECNICA BARRAS.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>10</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA TWISTER.jpg</td><td>DOT_FT_FICHA TECNICA TWISTER.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>11</td><td>BIOSALUDABLES/FT</td><td>FICHA TECNICA SURF.jpg</td><td>DOT_FT_FICHA TECNICA SURF.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td></tr>
+<tr><td>12</td><td>BIOSALUDABLES/MTO</td><td>manual de uso biosaludables.pdf</td><td>DOT_MTO_manual de uso biosaludables.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>13</td><td>CANCHA MULT/MTO</td><td>Manual Cancha Multiple.pdf</td><td>DOT_MTO_Manual Cancha Multiple.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>14</td><td>CANCHA MULT/MTO</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td><span class="obs-tag obs-dup">Es acta. DUPLICADO</span></td></tr>
+<tr><td>15</td><td>CANCHA MULT/CERT</td><td>CERTIFICADO DE GARANTIA CANCHA MULTIPLE CAPITAL.pdf</td><td>DOT_CER_CERTIFICADO DE GARANTIA CANCHA MULTIPLE CAPITAL.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>16</td><td>CANCHA MULT/CERT</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL CANCHA MULTIPLE.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #14</span></td></tr>
+<tr><td>17</td><td>CANCHA MULT/FT</td><td>Ficha Tecnica Cancha Multiple Funza.pdf</td><td>DOT_FT_Ficha Tecnica Cancha Multiple Funza.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>18</td><td>CANCHA VOLLEY/MTO</td><td>ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO</span></td></tr>
+<tr><td>19</td><td>CANCHA VOLLEY/CERT</td><td>ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MANUAL DE MANTENIMIENTO, GARANTIA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #18</span></td></tr>
+<tr><td>20</td><td>CANCHA VOLLEY/FT</td><td>FICHA TECNICA CANCHA DE VOLEIBOL NACIONAL (1)1.pdf</td><td>DOT_FT_FICHA TECNICA CANCHA DE VOLEIBOL NACIONAL (1)1.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>21</td><td>GIMNASIO/MTO</td><td>Manual Caminadora X3i - En Ingles Movifit.pdf</td><td>DOT_MTO_Manual Caminadora X3i - En Ingles Movifit.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>22</td><td>GIMNASIO/MTO</td><td>Manual Eliptica FS 380 - En Espanol XTERRA (1).pdf</td><td>DOT_MTO_Manual Eliptica FS 380 - En Espanol XTERRA (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>23</td><td>GIMNASIO/CERT</td><td>CARTA DE GARANTIA - CONSTRUCTORA CAPITAL BOGOTA S A S - CAOBA.pdf</td><td>DOT_CER_CARTA DE GARANTIA - CONSTRUCTORA CAPITAL BOGOTA S A S - CAOBA.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>24</td><td>GIMNASIO/CERT</td><td>Ventaneria.pdf</td><td>DOT_CER_Ventaneria.pdf</td><td><span class="obs-tag obs-default">Fuera de contexto</span></td></tr>
+<tr><td>25</td><td>GIMNASIO/FT</td><td>FICHA X3IBE (1).pdf</td><td>DOT_FT_FICHA X3IBE (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>26</td><td>GIMNASIO/FT</td><td>FICHA NMAN (1).pdf</td><td>DOT_FT_FICHA NMAN (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>27</td><td>GIMNASIO/FT</td><td>factura vinilos.pdf</td><td>DOT_FAC_factura vinilos.pdf</td><td><span class="obs-tag obs-default">Es FACTURA</span></td></tr>
+<tr><td>28</td><td>JUEGOS INF/CERT</td><td>FT AU-M003 Carro de Bomberos.pdf</td><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
+<tr><td>29</td><td>JUEGOS INF/CERT</td><td>ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
+<tr><td>30</td><td>JUEGOS INF/FT</td><td>FT AU-M003 Carro de Bomberos.pdf</td><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #28</span></td></tr>
+<tr><td>31</td><td>JUEGOS INF/FT</td><td>ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #29</span></td></tr>
+<tr><td>32</td><td>JUEGOS INF/MTO</td><td>FT AU-M003 Carro de Bomberos.pdf</td><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #28</span></td></tr>
+<tr><td>33</td><td>JUEGOS INF/MTO</td><td>ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td>DOT_ACT_ACTA DE ENTREGA MUELLES OBRA CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #29</span></td></tr>
+<tr><td>34</td><td>SALON JUEGOS/CERT</td><td>GR-2025-08 CONSTRUCTORA CAPITAL - OBRA CAOBA MESAS DE JUEGOS (2).pdf</td><td>DOT_CER_GR-2025-08 CONSTRUCTORA CAPITAL - OBRA CAOBA MESAS.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>35</td><td>SALON JUEGOS/CERT</td><td>XBOX.pdf</td><td>DOT_CER_XBOX.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>36</td><td>SALON JUEGOS/CERT</td><td>TV 1.pdf</td><td>DOT_CER_TV 1.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>37</td><td>SALON JUEGOS/CERT</td><td>TV 2.pdf</td><td>DOT_CER_TV 2.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>38</td><td>SALON JUEGOS/FT</td><td>Ficha Tecnica Mesa de Billar Pool (1).pdf</td><td>DOT_FT_Ficha Tecnica Mesa de Billar Pool (1).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td></tr>
+<tr><td>39</td><td>SALON JUEGOS/FT</td><td>HIELO 3.pdf</td><td>DOT_FT_HIELO 3.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
+<tr><td>40</td><td>SALON JUEGOS/FT</td><td>HIELO 2.pdf</td><td>DOT_FT_HIELO 2.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
+<tr><td>41</td><td>SALON JUEGOS/FT</td><td>factura vinilos.pdf</td><td>DOT_FAC_factura vinilos.pdf</td><td><span class="obs-tag obs-default">Es FACTURA</span></td></tr>
+<tr><td>42</td><td>SALON JUEGOS/FT</td><td>HIELO 1.pdf</td><td>DOT_FT_HIELO 1.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
+<tr><td>43</td><td>SALON JUEGOS/FT</td><td>Ficha Tecnica Mesa de Ping Pong (2).pdf</td><td>DOT_FT_Ficha Tecnica Mesa de Ping Pong (2).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td></tr>
+<tr><td>44</td><td>SALON REC INF/FT</td><td>Ficha Tecnica Parque CAOBA.pdf</td><td>DOT_FT_Ficha Tecnica Parque CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO</span></td></tr>
+<tr><td>45</td><td>SALON REC INF/CERT</td><td>GR-2025-22 CONSTRUCTORA CAPITAL - OBRA CAOBA.pdf</td><td>DOT_CER_GR-2025-22 CONSTRUCTORA CAPITAL - OBRA CAOBA.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>46</td><td>SALON REC INF/MTO</td><td>Ficha Tecnica Parque CAOBA.pdf</td><td>DOT_FT_Ficha Tecnica Parque CAOBA.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #44</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- A.02 -->
+    <div class="step-row completed" onclick="toggleStep('a02')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>A.02</strong><span>Dotaciones zona social 2</span></div>
+      <div class="step-files">27 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-detail" id="a02">
+      <div class="detail-filter">
+        <input type="text" placeholder="Filtrar documentos..." oninput="filterTable(this,'a02-table')">
+        <span class="detail-count" id="a02-count">27 documentos</span>
+      </div>
+      <div class="detail-table-wrap">
+        <table class="detail-table" id="a02-table">
+          <thead><tr><th>#</th><th>Carpeta</th><th>Original</th><th>Nuevo</th><th>Obs</th></tr></thead>
+          <tbody>
+<tr><td>47</td><td>SALONES SOC/MTO</td><td>PLEGABLE-LIMPIEZA-WEB.pdf</td><td>DOT_MTO_PLEGABLE-LIMPIEZA-WEB.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>48</td><td>SALONES SOC/MTO</td><td>MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS.docx</td><td>DOT_MTO_MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS.docx</td><td><span class="obs-tag obs-warn">.docx</span></td></tr>
+<tr><td>49</td><td>SALONES SOC/MTO</td><td>MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS (2).pdf</td><td>DOT_MTO_MANUAL DE USO Y MANTENIMIENTO DE LAS PUERTAS (2).pdf</td><td><span class="obs-tag obs-default">PDF del #48</span></td></tr>
+<tr><td>50</td><td>SALONES SOC/FT</td><td>225026250_FT_(N) MADERA NOGAL BEIGE.pdf</td><td>DOT_FT_225026250_FT_(N) MADERA NOGAL BEIGE.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>51</td><td>SALONES SOC/FT</td><td>13449 PUFF 2.pdf</td><td>DOT_FT_13449 PUFF 2.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>52</td><td>SALONES SOC/FT</td><td>Certificacion Legalidad Madera 2024 DEXCO.pdf</td><td>DOT_CER_Certificacion Legalidad Madera 2024 DEXCO.pdf</td><td><span class="obs-tag obs-default">Es CERTIFICADO</span></td></tr>
+<tr><td>53</td><td>SALONES SOC/FT</td><td>SOFA+PUFF (1).pdf</td><td>DOT_FT_SOFA+PUFF (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>54</td><td>SALONES SOC/FT</td><td>HIELO 3.pdf</td><td>DOT_FT_HIELO 3.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
+<tr><td>55</td><td>SALONES SOC/FT</td><td>HIELO 2.pdf</td><td>DOT_FT_HIELO 2.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
+<tr><td>56</td><td>SALONES SOC/FT</td><td>HIELO 1.pdf</td><td>DOT_FT_HIELO 1.pdf</td><td><span class="obs-tag obs-default">Sin contexto</span></td></tr>
+<tr><td>57</td><td>SALONES SOC/FT</td><td>9338 HOME GRIS 14.pdf</td><td>DOT_FT_9338 HOME GRIS 14.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>58</td><td>SALONES SOC/FT</td><td>8331 PUFF 1.pdf</td><td>DOT_FT_8331 PUFF 1.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>59</td><td>SALONES SOC/FT</td><td>9338 HOME GRIS 16.pdf</td><td>DOT_FT_9338 HOME GRIS 16.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>60</td><td>SALONES SOC/FT</td><td>16185 PUFF 3.pdf</td><td>DOT_FT_16185 PUFF 3.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>61</td><td>SALONES SOC/FT</td><td>9338 HOME GRIS 17.pdf</td><td>DOT_FT_9338 HOME GRIS 17.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>62</td><td>SALONES SOC/FT</td><td>Lavamanos ZC.pdf</td><td>DOT_FT_Lavamanos ZC.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>63</td><td>SENDERO/MTO</td><td>LB-INGES-DM55IC-MD19-CA14.pdf</td><td>DOT_MTO_LB-INGES-DM55IC-MD19-CA14.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
+<tr><td>64</td><td>SENDERO/CERT</td><td>LB-INGES-DM55IC-MD19-CA14.pdf</td><td>DOT_CER_LB-INGES-DM55IC-MD19-CA14.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #63</span></td></tr>
+<tr><td>65</td><td>SENDERO/FT</td><td>LB-INGES-DM55IC-MD19-CA14.pdf</td><td>DOT_FT_LB-INGES-DM55IC-MD19-CA14.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #63</span></td></tr>
+<tr><td>66</td><td>ZONA BBQ/CERT</td><td>GARANTIA BBQ A GAS FE-538 CONSTRUCTORA CAPITAL.pdf</td><td>DOT_CER_GARANTIA BBQ A GAS FE-538 CONSTRUCTORA CAPITAL.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>67</td><td>ZONA BBQ/FT</td><td>FICHA TECNICA BBQ CON MUEBLE INFERIOR 25C.pdf</td><td>DOT_FT_FICHA TECNICA BBQ CON MUEBLE INFERIOR 25C.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>68</td><td>ZONA BBQ/MTO</td><td>MANUAL BBQ A GAS 60CM CON MUEBLE ELEMENT HOUSE.pdf</td><td>DOT_MTO_MANUAL BBQ A GAS 60CM CON MUEBLE ELEMENT HOUSE.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>69</td><td>ZONA CANINA/MTO</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO x3</span></td></tr>
+<tr><td>70</td><td>ZONA CANINA/FT</td><td>INFORME 025-2984 - 0007 CALIDAD BANCAS.pdf</td><td>DOT_INF_INFORME 025-2984 - 0007 CALIDAD BANCAS.pdf</td><td><span class="obs-tag obs-default">Es INFORME</span></td></tr>
+<tr><td>71</td><td>ZONA CANINA/FT</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #69</span></td></tr>
+<tr><td>72</td><td>ZONA CANINA/CERT</td><td>FICHA TECNICA M-31 LARGAS BANCAS.pdf</td><td>DOT_FT_FICHA TECNICA M-31 LARGAS BANCAS.pdf</td><td><span class="obs-tag obs-default">Es FT</span></td></tr>
+<tr><td>73</td><td>ZONA CANINA/CERT</td><td>ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td>DOT_ACT_ACTA DE ENTREGA CAOBA DE CAPITAL ZONA MASCOTAS.pdf</td><td><span class="obs-tag obs-dup">DUPLICADO #69</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- A.03 -->
+    <div class="step-row completed" onclick="toggleStep('a03')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>A.03</strong><span>Dotaciones piscina, fichas y manuales</span></div>
+      <div class="step-files">57 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-detail" id="a03">
+      <div class="detail-filter">
+        <input type="text" placeholder="Filtrar documentos..." oninput="filterTable(this,'a03-table')">
+        <span class="detail-count" id="a03-count">57 documentos</span>
+      </div>
+      <div class="detail-table-wrap">
+        <table class="detail-table" id="a03-table">
+          <thead><tr><th>#</th><th>Carpeta</th><th>Original</th><th>Nuevo</th><th>Obs</th></tr></thead>
+          <tbody>
+<tr><td>74</td><td>CERTIFICADOS</td><td>GARANTIA EQUIPOS PISCINAS CAOBA.pdf</td><td>DOT_CER_GARANTIA EQUIPOS PISCINAS CAOBA.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>75</td><td>DOTACIONES</td><td>Carta de Garantia Constructora Capital - Caoba.docx.pdf</td><td>DOT_CER_Carta de Garantia Constructora Capital - Caoba.docx.pdf</td><td><span class="obs-tag obs-warn">Doble ext</span></td></tr>
+<tr><td>76</td><td>DOTACIONES</td><td>FICHA TECNICA AQ043D (1).pdf</td><td>DOT_FT_FICHA TECNICA AQ043D (1).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>77</td><td>DOTACIONES</td><td>Ficha Tecnica Macetas Thai.pdf</td><td>DOT_FT_Ficha Tecnica Macetas Thai.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>78</td><td>DOTACIONES</td><td>FICHA TECNICA Y MANTENIMIENTO M-121 CANACA EN ACERO.pdf</td><td>DOT_FT_FICHA TECNICA Y MANTENIMIENTO M-121 CANACA EN ACERO.pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>79</td><td>DOTACIONES</td><td>FICHA TECNICA-MANUAL DE MTO Y GARANTIA PERCEPTUAL SILLAS Y MESAS.pdf</td><td>DOT_FT_FICHA TECNICA-MANUAL DE MTO Y GARANTIA PERCEPTUAL.pdf</td><td><span class="obs-tag obs-default">Doc mixto</span></td></tr>
+<tr><td>80</td><td>DOTACIONES</td><td>Recomendaciones de Uso Muebles Tramontina (2).pdf</td><td>DOT_MTO_Recomendaciones de Uso Muebles Tramontina (2).pdf</td><td><span class="obs-tag obs-ok">OK</span></td></tr>
+<tr><td>81</td><td>FICHAS TEC/ZIP</td><td>MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td>DOT_FT_MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td><span class="obs-tag obs-dup">ZIP redundante</span></td></tr>
+<tr><td>82-105</td><td>FICHAS TEC/subfolder</td><td>24 PDFs (accesorios, bombeo, calefaccion, seguridad, sauna)</td><td>DOT_FT_ / DOT_MTO_ / DOT_ACT_</td><td><span class="obs-tag obs-dup">DUPLICADOS en MANUALES</span></td></tr>
+<tr><td>106</td><td>MANUALES/ZIP</td><td>MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td>DOT_FT_MANUALES Y FICHAS TECNICAS CAOBA (2).zip</td><td><span class="obs-tag obs-dup">DUPLICADO #81</span></td></tr>
+<tr><td>107-130</td><td>MANUALES/subfolder</td><td>24 PDFs identicos a #82-105</td><td>DOT_FT_ / DOT_MTO_ / DOT_ACT_</td><td><span class="obs-tag obs-dup">DUPLICADOS EXACTOS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FASE B -->
+<div class="phase" id="phaseB">
+  <div class="phase-header" onclick="togglePhase('phaseB')">
+    <span class="phase-badge badge-a">FASE B</span>
+    <span class="phase-title">Documentacion Legal</span>
+    <span class="phase-meta">643 archivos</span>
+    <div class="phase-mini-bar"><div class="phase-mini-fill fill-success" style="width:100%"></div></div>
+    <span class="phase-pct c-success">100%</span>
+    <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+  </div>
+  <div class="phase-body">
+
+    <!-- B1.01 -->
+    <div class="step-row completed" onclick="toggleStep('b101')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B1.01</strong><span>Memorias + Planos E1 (inicio)</span></div>
+      <div class="step-files">50 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b101">
+      <p>7 memorias estructurales: <code>EST_MEM_caoba e1.pdf</code> &hellip; <code>EST_MEM_caoba e7.pdf</code></p>
+      <p>5 memorias NE: <code>EST_MEM_caoba e1 ne.pdf</code> &hellip; <code>EST_MEM_caoba e5 ne.pdf</code></p>
+      <p>38 planos E1: <code>EST_PLN_Caoba E1-00.PDF</code> &hellip; <code>EST_PLN_Caoba E1-40.PDF</code></p>
+    </div>
+
+    <!-- B1.02 -->
+    <div class="step-row completed" onclick="toggleStep('b102')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B1.02</strong><span>Planos E1 restantes + E2</span></div>
+      <div class="step-files">50 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b102">
+      <p>15 planos E1 restantes: <code>EST_PLN_Caoba E1-41.PDF</code> &hellip; <code>EST_PLN_Caoba E1-D-06.PDF</code></p>
+      <p>35 planos E2: <code>EST_PLN_Caoba E2-00.PDF</code> &hellip; <code>EST_PLN_EST_CAO E2-34.PDF</code></p>
+    </div>
+
+    <!-- B1.03 -->
+    <div class="step-row completed" onclick="toggleStep('b103')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B1.03</strong><span>Planos E2 restantes + E3</span></div>
+      <div class="step-files">59 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b103">
+      <p>13 planos E2 restantes</p>
+      <p>46 planos E3: serie completa de planos estructurales E3</p>
+    </div>
+
+    <!-- B1.04 -->
+    <div class="step-row completed" onclick="toggleStep('b104')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B1.04</strong><span>Planos E4-E7 + Suelos + Arq</span></div>
+      <div class="step-files">50 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b104">
+      <p>29 planos E4&ndash;E7</p>
+      <p>1 estudio de suelos: <code>EST_INF_Estudio de suelos Caoba.pdf</code></p>
+      <p>20 planos arquitectonicos: <code>ARQ_PLN_Caoba A-01.PDF</code> &hellip; <code>ARQ_PLN_Caoba A-20.PDF</code></p>
+    </div>
+
+    <!-- B1.05 -->
+    <div class="step-row completed" onclick="toggleStep('b105')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B1.05</strong><span>Arq restantes + PH + Resoluciones</span></div>
+      <div class="step-files">35 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b105">
+      <p>18 planos arquitectonicos restantes</p>
+      <p>14 planos PH: <code>ARQ_PLN_Caoba Ph-01.PDF</code> &hellip; <code>ARQ_PLN_Caoba Ph-14.PDF</code> + Cuadro de Areas</p>
+      <p>3 resoluciones: <code>ARQ_RES_...</code></p>
+    </div>
+
+    <!-- B2.01 -->
+    <div class="step-row completed" onclick="toggleStep('b201')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.01</strong><span>Planos EST 1 firmados</span></div>
+      <div class="step-files">50 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b201">
+      <p>50 planos EST 1 firmados: <code>EST_PLN_EST_CAO_TORRE DOBLE-326-21-...</code></p>
+    </div>
+
+    <!-- B2.02 -->
+    <div class="step-row completed" onclick="toggleStep('b202')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.02</strong><span>EST 1 restantes + EST 2</span></div>
+      <div class="step-files">50 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b202">
+      <p>21 planos EST 1 restantes</p>
+      <p>29 planos EST 2</p>
+    </div>
+
+    <!-- B2.03 -->
+    <div class="step-row completed" onclick="toggleStep('b203')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.03</strong><span>EST 2 restantes + EST 3</span></div>
+      <div class="step-files">50 archivos</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b203">
+      <p>26 planos EST 2 restantes</p>
+      <p>24 planos EST 3</p>
+    </div>
+
+    <!-- B2.04 -->
+    <div class="step-row completed" onclick="toggleStep('b204')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.04</strong><span>EST 3 restantes (27) + EST 4 (14) + EST 5 (7)</span></div>
+      <div class="step-files">48 archivos &middot; &lt;1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b204">
+      <p>27 planos EST 3 restantes + 14 planos EST 4 + 7 planos EST 5 = 48 archivos</p>
+    </div>
+
+    <!-- B2.05+06 -->
+    <div class="step-row completed" onclick="toggleStep('b205')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.05+06</strong><span>EST 6 (7) + EST 7 (4) + Aprobados Vanti (47)</span></div>
+      <div class="step-files">58 archivos &middot; &lt;1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b205">
+      <p>7 planos EST 6 + 4 planos EST 7 + 47 Aprobados Vanti = 58 archivos (B2.06 fusionado)</p>
+    </div>
+
+    <!-- B2.07 -->
+    <div class="step-row completed" onclick="toggleStep('b207')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.07</strong><span>Electricos (32) + Deteccion SYC (24)</span></div>
+      <div class="step-files">56 archivos &middot; &lt;1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b207">
+      <p>32 planos Electricos + 24 planos Deteccion SYC = 56 archivos</p>
+    </div>
+
+    <!-- B2.08 -->
+    <div class="step-row completed" onclick="toggleStep('b208')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.08</strong><span>Hidraulicos C.Bombas (8) + Parqueaderos (35) + Torre D (7)</span></div>
+      <div class="step-files">50 archivos &middot; &lt;1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b208">
+      <p>8 Hidraulicos C.Bombas + 35 Parqueaderos + 7 Torre D = 50 archivos</p>
+    </div>
+
+    <!-- B2.09 -->
+    <div class="step-row completed" onclick="toggleStep('b209')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B2.09</strong><span>Hidraulicos Torre D (2) + Torre S (9) + Urbanismo (15)</span></div>
+      <div class="step-files">26 archivos &middot; &lt;1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b209">
+      <p>2 Hidraulicos Torre D + 9 Torre S + 15 Urbanismo = 26 archivos</p>
+    </div>
+
+    <!-- B3.01 -->
+    <div class="step-row completed" onclick="toggleStep('b301')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>B3.01</strong><span>Especificaciones + Estrato + CTO + RPH + Manuales + CSV</span></div>
+      <div class="step-files">11 archivos &middot; &lt;1 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="b301">
+      <p>Especificaciones + Estrato + CTO + RPH + Manuales + CSV = 11 archivos</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FASE C -->
+<div class="phase" id="phaseC">
+  <div class="phase-header" onclick="togglePhase('phaseC')">
+    <span class="phase-badge badge-b">FASE C</span>
+    <span class="phase-title">Bienes Esenciales</span>
+    <span class="phase-meta">1,178 archivos</span>
+    <div class="phase-mini-bar"><div class="phase-mini-fill fill-primary" style="width:8.6%"></div></div>
+    <span class="phase-pct" style="color:var(--primary)">8.6%</span>
+    <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+  </div>
+  <div class="phase-body">
+
+    <!-- C1.01 -->
+    <div class="step-row completed" onclick="toggleStep('c101')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C1.01</strong><span>Carpinterias + Aparatos (6 carpetas)</span></div>
+      <div class="step-files">51 archivos &middot; ~5 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c101">
+      <p>5 Aparatos e Incrustaciones: <code>DOT_FT_</code> (griferias, sanitarios)</p>
+      <p>9 Carp. Acero Inox/Vidrio: <code>DOT_CER_</code> <code>DOT_MTO_</code> &mdash; 4 duplicados entre carpetas</p>
+      <p>13 Carp. Aluminio: <code>DOT_FT_</code> <code>DOT_CER_</code> <code>EST_MEM_</code> (1 analisis estructural) <code>DOT_MTO_</code></p>
+      <p>10 Carp. Madera/Mesones: <code>DOT_CER_</code> <code>DOT_MTO_</code> <code>DOT_ESP_</code> &mdash; MANUALGMCARPINTEROS en 4 carpetas</p>
+      <p>10 Carp. Metalica PCF: <code>RCI_CER_</code> <code>RCI_FT_</code> <code>RCI_MTO_</code> &mdash; 4 archivos x 2-3 carpetas (duplicados)</p>
+      <p>4 Carp. Metalica: <code>DOT_CER_</code> <code>RCI_CER_</code> <code>RCI_MTO_</code> &mdash; 1 duplicado</p>
+      <p style="margin-top:6px;color:var(--accent);">Hallazgos: ~14 duplicados, ~8 en carpeta equivocada, fallo encoding E/U requirio reintento</p>
+    </div>
+
+    <!-- C2.01 -->
+    <div class="step-row completed" onclick="toggleStep('c201')">
+      <div class="step-icon done">&#10003;</div>
+      <div class="step-name"><strong>C2.01</strong><span>Controles + Legales + Dotacion</span></div>
+      <div class="step-files">50 archivos &middot; ~2 min</div>
+      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    </div>
+    <div class="step-summary" id="c201">
+      <p>24 Controles Asentamientos: 7 <code>EST_CTR_</code> carteras + 10 <code>EST_CTR_</code> controles + 7 <code>EST_INF_</code> informes</p>
+      <p>11 Documentos Legales: <code>EST_CER_</code> certificados CTO por torre (T1-T18 + parqueaderos)</p>
+      <p>15 Dotacion: 14 <code>DOT_FAC_</code> facturas + 1 <code>DOT_MTO_</code> MANUALGMCARPINTEROS (5ta copia)</p>
+      <p style="margin-top:6px;color:var(--accent);">Hallazgos: 3 posibles duplicados por fecha, typos &ldquo;Torre Gua&rdquo; y &ldquo;TORRES TORRES&rdquo;</p>
+    </div>
+
+    <!-- C3.01 (pendiente) -->
+    <div class="step-row pending">
+      <div class="step-icon wait"></div>
+      <div class="step-name"><strong>C3.01</strong><span>Ganchos + Equipos + Impermeabilizaciones (1)</span></div>
+      <div class="step-files">50 archivos</div>
+    </div>
+    <!-- C3.02 -->
+    <div class="step-row pending">
+      <div class="step-icon wait"></div>
+      <div class="step-name"><strong>C3.02</strong><span>Impermeabilizaciones (2)</span></div>
+      <div class="step-files">25 archivos</div>
+    </div>
+    <!-- C4.01 -->
+    <div class="step-row pending">
+      <div class="step-icon wait"></div>
+      <div class="step-name"><strong>C4.01</strong><span>Pisos + Red Contra Incendio</span></div>
+      <div class="step-files">37 archivos</div>
+    </div>
+    <!-- C5 (16 pasos) -->
+    <div class="step-row pending">
+      <div class="step-icon wait"></div>
+      <div class="step-name"><strong>C5.01&ndash;C5.16</strong><span>Red Electrica (16 lotes)</span></div>
+      <div class="step-files">769 archivos</div>
+    </div>
+    <!-- C6 -->
+    <div class="step-row pending">
+      <div class="step-icon wait"></div>
+      <div class="step-name"><strong>C6.01&ndash;C6.02</strong><span>Red Gas + Hidraulica</span></div>
+      <div class="step-files">63 archivos</div>
+    </div>
+    <!-- C7 -->
+    <div class="step-row pending">
+      <div class="step-icon wait"></div>
+      <div class="step-name"><strong>C7.01&ndash;C7.03</strong><span>Seguridad + Ascensores</span></div>
+      <div class="step-files">133 archivos</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- HALLAZGOS -->
+<div class="hallazgos-section">
+  <div class="section-title">
+    Hallazgos del Diagnostico
+    <span class="count-badge">89 detectados</span>
+  </div>
+  <div class="hallazgos-grid">
+    <div class="hallazgo-card">
+      <div class="h-title" style="color:var(--warning);">Duplicados</div>
+      <div class="h-value" style="color:var(--warning);">~51</div>
+      <div class="h-desc">Archivos identicos en multiples carpetas</div>
+      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:57%;background:var(--warning);"></div></div>
+    </div>
+    <div class="hallazgo-card">
+      <div class="h-title" style="color:var(--accent);">Mal clasificados</div>
+      <div class="h-value" style="color:var(--accent);">~22</div>
+      <div class="h-desc">Archivos en carpetas incorrectas (ej: FT en CERT)</div>
+      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:25%;background:var(--accent);"></div></div>
+    </div>
+    <div class="hallazgo-card">
+      <div class="h-title" style="color:#60A5FA;">Formato no estandar</div>
+      <div class="h-value" style="color:#60A5FA;">11</div>
+      <div class="h-desc">JPG, DOCX, doble extension, encoding roto</div>
+      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:16%;background:#60A5FA;"></div></div>
+    </div>
+    <div class="hallazgo-card">
+      <div class="h-title" style="color:var(--muted);">Sin contexto</div>
+      <div class="h-value" style="color:var(--muted);">8</div>
+      <div class="h-desc">Archivos sin relacion clara (HIELO, Ventaneria)</div>
+      <div class="hallazgo-bar"><div class="hallazgo-bar-fill" style="width:12%;background:var(--muted);"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOKEN CHART -->
+<div class="token-section">
+  <div class="section-title">Consumo de Tokens por Paso</div>
+  <div class="chart-container">
+    <div class="bar-chart" id="tokenChart">
+      <div class="bar-group">
+        <div class="bar-value">8.2K</div>
+        <div class="bar" style="height:54%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">A.01</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">5.1K</div>
+        <div class="bar" style="height:34%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">A.02</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">6.8K</div>
+        <div class="bar" style="height:45%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">A.03</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">7.5K</div>
+        <div class="bar" style="height:50%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B1.01</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">7.2K</div>
+        <div class="bar" style="height:48%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B1.02</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">8.9K</div>
+        <div class="bar" style="height:59%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B1.03</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">7.4K</div>
+        <div class="bar" style="height:49%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B1.04</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">5.3K</div>
+        <div class="bar" style="height:35%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B1.05</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">5.0K</div>
+        <div class="bar" style="height:33%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.01</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4.8K</div>
+        <div class="bar" style="height:32%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.02</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4.8K</div>
+        <div class="bar" style="height:32%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.03</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.04</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.05+06</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.07</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.08</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">3K</div>
+        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B2.09</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
+        <div class="bar-label">B3.01</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">6K</div>
+        <div class="bar" style="height:40%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C1.01</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value">4K</div>
+        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
+        <div class="bar-label">C2.01</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--muted);">
+      Total acumulado: <strong style="color:var(--text);">104K tokens</strong> &middot; Promedio por paso: <strong style="color:var(--text);">5.5K</strong>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>CAOBA de Novaterra P.H. &mdash; Diagnostico Documental</p>
+  <p style="margin-top:4px;">Generado el 03 Abr 2026 &middot; Dashboard v1.0</p>
+</footer>
+
+</div>
+
+<script>
+function togglePhase(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function toggleStep(id) {
+  var el = document.getElementById(id);
+  var isOpen = el.classList.contains('open');
+  el.classList.toggle('open');
+  // Find the step-row before this detail/summary
+  var prev = el.previousElementSibling;
+  while (prev && !prev.classList.contains('step-row')) {
+    prev = prev.previousElementSibling;
+  }
+  if (prev) {
+    prev.classList.toggle('expanded', !isOpen);
+  }
+}
+
+function filterTable(input, tableId) {
+  var query = input.value.toLowerCase();
+  var table = document.getElementById(tableId);
+  var rows = table.querySelectorAll('tbody tr');
+  var visible = 0;
+  rows.forEach(function(row) {
+    var text = row.textContent.toLowerCase();
+    var match = text.indexOf(query) !== -1;
+    row.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  var countEl = document.getElementById(tableId.replace('-table', '-count'));
+  if (countEl) {
+    countEl.textContent = visible + ' documento' + (visible !== 1 ? 's' : '');
+  }
+}
+</script>
+</body>
+</html>
