@@ -1087,12 +1087,14 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <p>CAOBA de Novaterra P.H. &mdash; Diagnostico Documental</p>
-  <p style="margin-top:4px;">Generado el 03 Abr 2026 &middot; Dashboard v1.0</p>
+  <p>Creado con <span style="color:var(--primary);">&hearts;</span> por Ingenium Holding Corp S.A.S &copy; <span id="year-caoba"></span> &mdash; Desde Latam para el mundo.</p>
 </footer>
 
 </div>
 
+<script>
+document.getElementById('year-caoba').textContent = new Date().getFullYear();
+</script>
 <script>
 function togglePhase(id) {
   document.getElementById(id).classList.toggle('open');

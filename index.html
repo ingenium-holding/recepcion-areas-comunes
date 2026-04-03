@@ -229,9 +229,12 @@ footer a:hover { color: var(--text); }
 </div>
 
 <footer>
-  <p><strong>Ingenium Holding Corp SAS</strong> &mdash; NIT 901.180.391-4</p>
+  <p>Creado con <span style="color:#9600C1;">&hearts;</span> por Ingenium Holding Corp S.A.S &copy; <span id="year-landing"></span> &mdash; Desde Latam para el mundo.</p>
   <p style="margin-top:6px;"><a href="https://ingeniumholding.co" target="_blank">ingeniumholding.co</a></p>
 </footer>
 
+<script>
+document.getElementById('year-landing').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
