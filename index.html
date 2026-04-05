@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ingenium Holding — Recepcion de Areas Comunes</title>
+<title>Recepcion de Areas Comunes — Ingenium Holding Corp</title>
+<meta name="description" content="Consultoria tecnica y juridica para la recepcion de areas comunes en propiedad horizontal. Verificacion independiente con trazabilidad y respaldo legal.">
 <style>
 :root {
   --primary: #9600C1;
@@ -15,10 +16,18 @@
   --text: #E8E8F0;
   --muted: #8888A0;
   --success: #4ADE80;
-  --radius: 12px;
+  --warning: #FACC15;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -26,215 +35,807 @@ body {
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
 }
 
-.container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+/* ── Layout ── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-/* HEADER */
-header { text-align: center; padding: 60px 0 48px; }
-.logo-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
+section {
+  padding: 80px 0;
+}
+
+@media (max-width: 640px) {
+  section { padding: 56px 0; }
+}
+
+/* ── Typography ── */
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   margin-bottom: 16px;
 }
-header h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: .01em;
-  line-height: 1.2;
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 8px;
 }
-header .subtitle {
+
+p {
   color: var(--muted);
   font-size: 1rem;
-  margin-top: 12px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 1.7;
 }
 
-/* DIVIDER */
-.divider {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  border-radius: 2px;
-  margin: 0 auto 48px;
-}
-
-/* SERVICE DESC */
-.service-desc {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 48px;
+.section-subtitle {
   color: var(--muted);
-  font-size: .92rem;
-  line-height: 1.8;
+  font-size: 1.05rem;
+  max-width: 640px;
+  margin-bottom: 48px;
 }
 
-/* PROJECT CARDS */
-.projects-title {
-  font-size: .78rem;
-  font-weight: 700;
+.section-header {
+  margin-bottom: 48px;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #a810d4;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(150, 0, 193, 0.5);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  background: rgba(150, 0, 193, 0.08);
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(150, 0, 193, 0.25);
+}
+
+/* ── Grid ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .grid-4 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════
+   SECTION 1 — HERO
+   ══════════════════════════════════════ */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(150, 0, 193, 0.12) 0%, transparent 60%);
+}
+
+.hero-logo {
+  height: 240px;
+  width: auto;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  max-width: 720px;
+  margin: 0 auto 20px;
+}
+
+.hero-subtitle {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
   color: var(--muted);
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 64px 0 56px; }
+  .hero-logo { height: 160px; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; max-width: 320px; text-align: center; }
+}
+
+/* ══════════════════════════════════════
+   SECTION 2 — EL PROBLEMA
+   ══════════════════════════════════════ */
+.problema {
+  background: var(--surface);
+}
+
+.problema-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(201, 102, 79, 0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--accent);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.problema .card {
+  background: var(--surface2);
+}
+
+.problema .card p {
+  font-size: 0.95rem;
+}
+
+/* ══════════════════════════════════════
+   SECTION 3 — QUE RESOLVEMOS
+   ══════════════════════════════════════ */
+.servicios .card {
+  text-align: left;
+}
+
+.servicio-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(150, 0, 193, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.servicios .intro-text {
+  max-width: 720px;
+  margin-bottom: 40px;
+  font-size: 1.02rem;
+}
+
+/* ══════════════════════════════════════
+   SECTION 4 — METODOLOGIA
+   ══════════════════════════════════════ */
+.metodologia {
+  background: var(--surface);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .steps { grid-template-columns: 1fr; }
+}
+
+.step {
+  background: var(--surface2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+
+.step:hover {
+  border-color: rgba(150, 0, 193, 0.25);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--dark);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.step h3 {
+  font-size: 1rem;
+}
+
+.step p {
+  font-size: 0.9rem;
+}
+
+/* ══════════════════════════════════════
+   SECTION 5 — ENTREGABLES
+   ══════════════════════════════════════ */
+.entregables-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .entregables-list { grid-template-columns: 1fr; }
+}
+
+.entregable-item {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: border-color 0.2s;
+}
+
+.entregable-item:hover {
+  border-color: rgba(150, 0, 193, 0.25);
+}
+
+.entregable-check {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(74, 222, 128, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.entregable-check svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--success);
+}
+
+.entregable-item span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ══════════════════════════════════════
+   SECTION 6 — BENEFICIOS
+   ══════════════════════════════════════ */
+.beneficios {
+  background: var(--surface);
+}
+
+.beneficio-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════
+   SECTION 7 — CASO DE ESTUDIO
+   ══════════════════════════════════════ */
+.caso-card {
+  background: var(--surface);
+  border: 1px solid rgba(150, 0, 193, 0.2);
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 560px;
+  margin: 0 auto;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.caso-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.caso-card h3 {
+  color: var(--text);
+  font-size: 1.2rem;
   margin-bottom: 20px;
 }
 
-.project-card {
-  display: block;
-  background: var(--surface);
-  border: 1px solid #2a2a3a;
-  border-radius: var(--radius);
-  padding: 28px 28px 24px;
-  margin-bottom: 16px;
-  text-decoration: none;
-  color: var(--text);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-}
-.project-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,.4);
-  border-color: rgba(150,0,193,.4);
-}
-.project-header {
+.caso-stats {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-.project-name {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-.project-status {
-  font-size: .72rem;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.status-active {
-  background: rgba(150,0,193,.15);
-  color: #c88aec;
-}
-.status-complete {
-  background: rgba(74,222,128,.12);
-  color: var(--success);
-}
-.project-meta {
-  display: flex;
-  gap: 24px;
-  font-size: .82rem;
-  color: var(--muted);
-  margin-bottom: 16px;
+  gap: 32px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
 }
-.project-meta span strong { color: var(--text); }
-.project-progress-track {
-  height: 6px;
-  background: var(--surface2);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.project-progress-fill {
-  height: 100%;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--dark), var(--primary), var(--accent));
-  transition: width 1s ease;
-}
-.project-footer {
+
+.caso-stat {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  font-size: .78rem;
-  color: var(--muted);
+  flex-direction: column;
 }
-.project-arrow {
+
+.caso-stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.caso-stat-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.caso-link {
   color: var(--primary);
   font-weight: 600;
-  font-size: .85rem;
+  font-size: 0.95rem;
 }
 
-/* FOOTER */
-footer {
+/* ══════════════════════════════════════
+   SECTION 8 — CONTACTO
+   ══════════════════════════════════════ */
+.contacto {
+  background: var(--surface);
+}
+
+.contacto-card {
+  background: var(--surface2);
+  border: 1px solid rgba(150, 0, 193, 0.15);
+  border-radius: 16px;
+  padding: 48px;
+  max-width: 600px;
+  margin: 0 auto;
   text-align: center;
-  padding: 48px 0 20px;
-  color: #555570;
-  font-size: .75rem;
-  border-top: 1px solid #1a1a2a;
-  margin-top: 60px;
 }
-footer a { color: var(--muted); text-decoration: none; }
-footer a:hover { color: var(--text); }
 
-@media (max-width: 640px) {
-  header h1 { font-size: 1.6rem; }
-  .project-meta { gap: 12px; }
-  .project-card { padding: 20px; }
+.contacto-card h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.contacto-card .section-subtitle {
+  margin: 0 auto 32px;
+}
+
+.contacto-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.contacto-info a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.contacto-info a:hover {
+  color: var(--primary);
+}
+
+.contacto-info-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 8px;
+}
+
+@media (max-width: 600px) {
+  .contacto-card { padding: 32px 24px; }
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════ */
+footer {
+  padding: 32px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+footer p {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--primary);
 }
 </style>
 </head>
 <body>
-<div class="container">
 
-<header>
-  <img src="assets/logo-ihc-blanco.png" alt="Ingenium Holding Corp" style="height:240px;margin-bottom:24px;">
-  <h1>Recepcion de Areas Comunes</h1>
-  <p class="subtitle">Consultoria profesional para la verificacion y acompanamiento en el recibo de zonas comunes en Propiedad Horizontal</p>
-</header>
-
-<div class="divider"></div>
-
-<div class="service-desc">
-  Verificamos que las areas comunes entregadas por la constructora cumplan con las especificaciones
-  contractuales, normativas vigentes (NSR-10, RETIE, RETILAP, RAS, NTC 1500, Ley 675) y estandares
-  de calidad. Cada proyecto incluye diagnostico documental, inspecciones de campo, informe
-  tecnico-juridico y acompanamiento a correcciones.
-</div>
-
-<div class="projects-title">Proyectos Activos</div>
-
-<!-- CAOBA -->
-<a href="caoba/" class="project-card">
-  <div class="project-header">
-    <div class="project-name">Caoba de Novaterra P.H.</div>
-    <span class="project-status status-active">EN CURSO</span>
+<!-- ════════════════════════════════════════════
+     SECTION 1 — HERO
+     ════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <img src="assets/logo-ihc-blanco.png" alt="Ingenium Holding Corp" class="hero-logo">
+    <h1>Recepcion de Areas Comunes en Propiedad Horizontal</h1>
+    <p class="hero-subtitle">Verificamos que lo que le entregaron a su edificio sea lo que pagaron. Con trazabilidad, rigor tecnico y respaldo juridico.</p>
+    <div class="hero-actions">
+      <a href="casos/caoba-demo/" class="btn btn-primary">Ver caso de estudio &rarr;</a>
+      <a href="#contacto" class="btn btn-outline">Solicitar consultoria</a>
+    </div>
   </div>
-  <div class="project-meta">
-    <span>Ubicacion: <strong>Mosquera, Cundinamarca</strong></span>
-    <span>Documentos: <strong>1,951</strong></span>
-    <span>Fase: <strong>Organizacion documental ✅</strong></span>
-  </div>
-  <div class="project-progress-track">
-    <div class="project-progress-fill" style="width:100%"></div>
-  </div>
-  <div class="project-footer">
-    <span>100% completado &mdash; 1,951 de 1,951 documentos procesados</span>
-    <span class="project-arrow">Ver dashboard &rarr;</span>
-  </div>
-</a>
+</section>
 
-</div>
+<!-- ════════════════════════════════════════════
+     SECTION 2 — EL PROBLEMA
+     ════════════════════════════════════════════ -->
+<section class="problema">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">El problema</span>
+      <h2>Su edificio recibio las areas comunes sin verificacion independiente?</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="problema-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <h3>Documentacion incompleta o sin trazabilidad</h3>
+        <p>Planos, manuales, garantias y fichas tecnicas entregados sin orden ni verificacion de completitud.</p>
+      </div>
+      <div class="card">
+        <div class="problema-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+        </div>
+        <h3>Equipos instalados sin fichas tecnicas ni garantias</h3>
+        <p>Ascensores, bombas, plantas electricas y otros equipos sin documentacion de respaldo.</p>
+      </div>
+      <div class="card">
+        <div class="problema-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3>Certificaciones electricas, hidraulicas o de gas faltantes</h3>
+        <p>Dictamenes RETIE, RETILAP, certificaciones de gas y pruebas hidraulicas sin entregar o incompletas.</p>
+      </div>
+      <div class="card">
+        <div class="problema-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <h3>Sin respaldo tecnico para reclamar ante la constructora</h3>
+        <p>El consejo de administracion no cuenta con argumentos tecnicos formales para exigir correcciones.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ════════════════════════════════════════════
+     SECTION 3 — QUE RESOLVEMOS
+     ════════════════════════════════════════════ -->
+<section class="servicios">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Que resolvemos</span>
+      <h2>Consultoria integral para la recepcion de zonas comunes</h2>
+    </div>
+    <p class="intro-text">Realizamos la verificacion tecnica y juridica independiente de las areas comunes entregadas por la constructora, asegurando el cumplimiento de la normativa colombiana aplicable: NSR-10, RETIE, RETILAP, RAS, NTC 1500 y Ley 675 de 2001.</p>
+    <div class="grid-4">
+      <div class="card">
+        <div class="servicio-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Diagnostico Documental</h3>
+        <p>Clasificacion y verificacion de toda la documentacion tecnica entregada.</p>
+      </div>
+      <div class="card">
+        <div class="servicio-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Inspecciones Tecnicas</h3>
+        <p>Revision en campo por especialistas: estructural, electrico, hidraulico, gas, RCI.</p>
+      </div>
+      <div class="card">
+        <div class="servicio-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Informe Tecnico-Juridico</h3>
+        <p>Documento formal con hallazgos, riesgos y recomendaciones con respaldo legal.</p>
+      </div>
+      <div class="card">
+        <div class="servicio-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Acompanamiento a Correcciones</h3>
+        <p>Seguimiento hasta que la constructora subsane las deficiencias encontradas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — METODOLOGIA
+     ════════════════════════════════════════════ -->
+<section class="metodologia">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Metodologia</span>
+      <h2>Como trabajamos</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Recoleccion documental</h3>
+        <p>Solicitamos y recibimos toda la documentacion tecnica entregada por la constructora a la copropiedad.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Organizacion y clasificacion</h3>
+        <p>Cada documento se clasifica por especialidad, tipo y relevancia dentro de un sistema con trazabilidad.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Diagnostico de completitud</h3>
+        <p>Identificamos que documentos faltan, cuales son insuficientes y cuales cumplen con la normativa.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <h3>Inspecciones de campo</h3>
+        <p>Especialistas verifican en sitio el estado de instalaciones electricas, hidraulicas, de gas, estructurales y mas.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">05</div>
+        <h3>Informe tecnico-juridico</h3>
+        <p>Consolidamos hallazgos en un documento formal con sustento normativo y recomendaciones.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">06</div>
+        <h3>Acompanamiento y correcciones</h3>
+        <p>Asistimos al consejo de administracion en el proceso de exigir las correcciones a la constructora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — ENTREGABLES
+     ════════════════════════════════════════════ -->
+<section class="entregables">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Entregables</span>
+      <h2>Que recibe el cliente</h2>
+    </div>
+    <div class="entregables-list">
+      <div class="entregable-item">
+        <div class="entregable-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span>Informe de Diagnostico Documental</span>
+      </div>
+      <div class="entregable-item">
+        <div class="entregable-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span>Informe Tecnico-Juridico</span>
+      </div>
+      <div class="entregable-item">
+        <div class="entregable-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span>Executive Brief (resumen ejecutivo para el consejo)</span>
+      </div>
+      <div class="entregable-item">
+        <div class="entregable-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span>Informe Final de Consultoria</span>
+      </div>
+      <div class="entregable-item">
+        <div class="entregable-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span>Informe de Valorizacion (estimacion de costos de correccion)</span>
+      </div>
+      <div class="entregable-item">
+        <div class="entregable-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span>Acceso a portal de seguimiento en tiempo real</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — BENEFICIOS
+     ════════════════════════════════════════════ -->
+<section class="beneficios">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Beneficios</span>
+      <h2>Por que Ingenium?</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card">
+        <div class="beneficio-icon" style="background: rgba(150, 0, 193, 0.1); color: var(--primary);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Trazabilidad total</h3>
+        <p>Cada documento clasificado, cada hallazgo registrado. Nada se pierde.</p>
+      </div>
+      <div class="card">
+        <div class="beneficio-icon" style="background: rgba(74, 222, 128, 0.1); color: var(--success);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Equipo multidisciplinario</h3>
+        <p>8 especialidades tecnicas + soporte juridico trabajando de forma coordinada.</p>
+      </div>
+      <div class="card">
+        <div class="beneficio-icon" style="background: rgba(201, 102, 79, 0.1); color: var(--accent);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Respaldo para reclamar</h3>
+        <p>Informes con rigor tecnico para procesos de arreglo directo o conciliacion.</p>
+      </div>
+      <div class="card">
+        <div class="beneficio-icon" style="background: rgba(250, 204, 21, 0.1); color: var(--warning);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Visibilidad en tiempo real</h3>
+        <p>Dashboard de seguimiento para el consejo de administracion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — CASO DE ESTUDIO
+     ════════════════════════════════════════════ -->
+<section class="caso">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Caso de estudio</span>
+      <h2>Proyecto en Curso</h2>
+    </div>
+    <a href="casos/caoba-demo/" class="caso-card">
+      <h3>Conjunto residencial — Cundinamarca</h3>
+      <div class="caso-stats">
+        <div class="caso-stat">
+          <span class="caso-stat-value">+1,900</span>
+          <span class="caso-stat-label">documentos clasificados</span>
+        </div>
+        <div class="caso-stat">
+          <span class="caso-stat-value">10</span>
+          <span class="caso-stat-label">especialidades tecnicas</span>
+        </div>
+      </div>
+      <span class="caso-link">Ver caso de estudio &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 8 — CONTACTO
+     ════════════════════════════════════════════ -->
+<section class="contacto" id="contacto">
+  <div class="container">
+    <div class="contacto-card">
+      <span class="section-label">Contacto</span>
+      <h2>Necesita verificar las areas comunes de su edificio?</h2>
+      <p class="section-subtitle">Contactenos para una evaluacion inicial sin costo.</p>
+      <div class="contacto-info">
+        <div>
+          <span class="contacto-info-label">Email</span>
+          <a href="mailto:team@ingeniumholding.co">team@ingeniumholding.co</a>
+        </div>
+        <div>
+          <span class="contacto-info-label">Web</span>
+          <a href="https://ingeniumholding.co" target="_blank" rel="noopener">ingeniumholding.co</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════ -->
 <footer>
-  <p>Creado con <span style="color:#9600C1;">&hearts;</span> por Ingenium Holding Corp S.A.S &copy; <span id="year-landing"></span> &mdash; Desde Latam para el mundo.</p>
-  <p style="margin-top:6px;"><a href="https://ingeniumholding.co" target="_blank">ingeniumholding.co</a></p>
+  <div class="container">
+    <p>Ingenium Holding Corp S.A.S &copy; <script>document.write(new Date().getFullYear())</script> — Desde Latam para el mundo. &nbsp;|&nbsp; <a href="https://ingeniumholding.co" target="_blank" rel="noopener">ingeniumholding.co</a></p>
+  </div>
 </footer>
 
-<script>
-document.getElementById('year-landing').textContent = new Date().getFullYear();
-</script>
 </body>
 </html>

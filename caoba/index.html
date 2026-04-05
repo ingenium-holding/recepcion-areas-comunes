@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAOBA — Dashboard de Progreso</title>
+<title>CAOBA de Novaterra P.H. — Vista Ejecutiva</title>
 <style>
 :root {
   --primary: #9600C1;
@@ -15,1171 +15,462 @@
   --text: #E8E8F0;
   --muted: #8888A0;
   --success: #4ADE80;
-  --pending: #555570;
   --warning: #FACC15;
-  --radius: 10px;
-  --transition: .25s cubic-bezier(.4,0,.2,1);
+  --alto: #EF4444;
+  --medio: #FACC15;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-/* BACK LINK */
+/* Back link */
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: inline-block;
+  padding: 24px 0 8px;
   color: var(--muted);
   text-decoration: none;
-  font-size: .85rem;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: color .2s ease, background .2s ease;
+  font-size: 14px;
+  transition: color 0.2s;
 }
-.back-link:hover {
-  color: var(--text);
-  background: var(--surface);
-}
+.back-link:hover { color: var(--text); }
 
-/* HEADER */
-header { text-align: center; padding: 28px 0 32px; }
-header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: .02em;
-}
-header .subtitle { color: var(--muted); font-size: .95rem; margin-top: 6px; }
-header .date {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: .8rem;
-  color: var(--muted);
-  background: var(--surface);
-  padding: 4px 14px;
-  border-radius: 20px;
-  border: 1px solid #2a2a3a;
-}
-
-/* KPI CARDS */
-.kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 14px;
+/* Header */
+.header {
+  text-align: center;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--surface2);
   margin-bottom: 32px;
 }
-.kpi {
-  background: var(--surface);
-  border: 1px solid #2a2a3a;
-  border-radius: var(--radius);
-  padding: 20px 18px;
-  text-align: center;
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-.kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
-.kpi.highlight {
-  background: linear-gradient(135deg, rgba(150,0,193,.15), rgba(201,102,79,.10));
-  border-color: rgba(150,0,193,.35);
-}
-.kpi .value { font-size: 1.7rem; font-weight: 700; margin-bottom: 2px; }
-.kpi .label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.kpi .sub { font-size: .72rem; color: var(--muted); margin-top: 4px; }
-.c-primary { color: var(--primary); }
-.c-accent { color: var(--accent); }
-.c-success { color: var(--success); }
-
-/* GLOBAL PROGRESS */
-.progress-section { margin-bottom: 36px; }
-.progress-track {
-  height: 14px;
-  background: var(--surface2);
-  border-radius: 7px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  border-radius: 7px;
-  background: linear-gradient(90deg, var(--dark), var(--primary), var(--accent));
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-  transition: width 1s ease;
-}
-@keyframes shimmer {
-  0%,100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-.progress-stats {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  margin-top: 10px;
-  font-size: .82rem;
-  color: var(--muted);
-}
-.progress-stats span strong { color: var(--text); }
-
-/* PHASE SECTIONS */
-.phase {
-  background: var(--surface);
-  border: 1px solid #2a2a3a;
-  border-radius: var(--radius);
+.header img {
+  height: 240px;
+  width: auto;
   margin-bottom: 16px;
-  overflow: hidden;
 }
-.phase-header {
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.header .subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.header .date {
+  color: var(--muted);
+  font-size: 14px;
+}
+.badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid rgba(136,136,160,0.2);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+/* KPI Cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+@media (min-width: 640px) {
+  .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.kpi-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  border: 1px solid var(--surface2);
+}
+.kpi-card .value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.kpi-card .label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+.kpi-card .value.warning { color: var(--warning); }
+.kpi-card .value.accent { color: var(--accent); }
+.kpi-card .value.success { color: var(--success); }
+
+/* Semaforo */
+.semaforo {
+  margin-bottom: 40px;
+}
+.fase-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 20px;
-  cursor: pointer;
-  user-select: none;
-  transition: background var(--transition);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(30,30,42,0.6);
 }
-.phase-header:hover { background: rgba(255,255,255,.02); }
-.phase-badge {
-  font-size: .7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  letter-spacing: .04em;
-}
-.badge-a { background: rgba(74,222,128,.15); color: var(--success); }
-.badge-b { background: rgba(150,0,193,.18); color: #c88aec; }
-.badge-c { background: rgba(85,85,112,.2); color: var(--pending); }
-.phase-title { font-weight: 600; font-size: .95rem; flex: 1; }
-.phase-meta { font-size: .75rem; color: var(--muted); white-space: nowrap; }
-.phase-mini-bar {
-  width: 80px;
-  height: 6px;
-  background: var(--surface2);
-  border-radius: 3px;
-  overflow: hidden;
+.fase-row:last-child { border-bottom: none; }
+.fase-num {
   flex-shrink: 0;
-}
-.phase-mini-fill { height: 100%; border-radius: 3px; transition: width .6s ease; }
-.fill-success { background: var(--success); }
-.fill-primary { background: var(--primary); }
-.fill-pending { background: var(--pending); }
-.phase-pct { font-size: .82rem; font-weight: 600; min-width: 40px; text-align: right; }
-.phase-chevron {
-  width: 20px;
-  height: 20px;
-  transition: transform var(--transition);
-  color: var(--muted);
-  flex-shrink: 0;
-}
-.phase.open .phase-chevron { transform: rotate(180deg); }
-.phase-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s ease, padding .3s ease;
-  padding: 0 20px;
-}
-.phase.open .phase-body {
-  max-height: 8000px;
-  padding: 0 20px 16px;
-}
-
-/* STEP ROWS */
-.step-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin-bottom: 4px;
-  font-size: .85rem;
-  transition: background var(--transition);
-}
-.step-row.completed { cursor: pointer; }
-.step-row.completed:hover { background: rgba(255,255,255,.03); }
-.step-row.pending { opacity: .45; }
-.step-icon {
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: .65rem;
+  font-size: 12px;
+  font-weight: 700;
+}
+.fase-num.done { background: var(--success); color: var(--bg); }
+.fase-num.pending { background: var(--surface2); color: var(--muted); }
+.fase-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+.fase-name.pending-text { color: var(--muted); }
+.fase-status {
   flex-shrink: 0;
-}
-.step-icon.done { background: rgba(74,222,128,.15); color: var(--success); }
-.step-icon.wait { background: rgba(85,85,112,.2); color: var(--pending); border: 1.5px solid var(--pending); }
-.step-name { flex: 1; }
-.step-name strong { color: var(--text); }
-.step-name span { color: var(--muted); margin-left: 6px; }
-.step-files { font-size: .75rem; color: var(--muted); white-space: nowrap; }
-.step-chevron {
-  width: 16px;
-  height: 16px;
-  color: var(--muted);
-  transition: transform var(--transition);
-  flex-shrink: 0;
-}
-.step-row.expanded .step-chevron { transform: rotate(180deg); }
-
-/* DETAIL PANEL */
-.step-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s ease, padding .3s ease;
-  padding: 0 0 0 28px;
-}
-.step-detail.open {
-  max-height: 3000px;
-  padding: 12px 0 12px 28px;
-}
-
-.detail-filter {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.detail-filter input {
-  background: var(--surface2);
-  border: 1px solid #2a2a3a;
-  border-radius: 6px;
-  padding: 6px 12px;
-  color: var(--text);
-  font-size: .8rem;
-  width: 260px;
-  outline: none;
-  transition: border-color var(--transition);
-}
-.detail-filter input:focus { border-color: var(--primary); }
-.detail-filter input::placeholder { color: var(--pending); }
-.detail-count { font-size: .72rem; color: var(--muted); }
-
-.detail-table-wrap {
-  max-height: 420px;
-  overflow-y: auto;
-  border-radius: 8px;
-  border: 1px solid #2a2a3a;
-}
-.detail-table-wrap::-webkit-scrollbar { width: 6px; }
-.detail-table-wrap::-webkit-scrollbar-track { background: var(--surface); }
-.detail-table-wrap::-webkit-scrollbar-thumb { background: #3a3a4a; border-radius: 3px; }
-
-.detail-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: .78rem;
-}
-.detail-table th {
-  position: sticky;
-  top: 0;
-  background: var(--surface2);
-  color: var(--muted);
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: .68rem;
-  letter-spacing: .06em;
-  padding: 8px 10px;
-  text-align: left;
-  border-bottom: 1px solid #2a2a3a;
-  z-index: 1;
-}
-.detail-table td {
-  padding: 7px 10px;
-  border-bottom: 1px solid rgba(42,42,58,.4);
-  vertical-align: top;
-  max-width: 280px;
-  word-break: break-word;
-}
-.detail-table tr:nth-child(even) td { background: rgba(255,255,255,.01); }
-.detail-table tr:nth-child(odd) td { background: rgba(0,0,0,.1); }
-.detail-table tr:hover td { background: rgba(150,0,193,.05); }
-
-.obs-tag {
-  display: inline-block;
-  padding: 2px 8px;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
   border-radius: 4px;
-  font-size: .7rem;
-  font-weight: 600;
-  white-space: nowrap;
 }
-.obs-ok { background: rgba(74,222,128,.12); color: var(--success); }
-.obs-dup { background: rgba(250,204,21,.12); color: var(--warning); }
-.obs-warn { background: rgba(201,102,79,.15); color: var(--accent); }
-.obs-default { background: rgba(136,136,160,.1); color: var(--muted); }
+.fase-status.done { color: var(--success); background: rgba(74,222,128,0.1); }
+.fase-status.pending { color: var(--muted); background: var(--surface2); }
 
-/* SUMMARY ROW (for B steps) */
-.step-summary {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 14px 0 28px;
-  font-size: .8rem;
-  color: var(--muted);
-  line-height: 1.7;
-  transition: max-height .4s ease, padding .3s ease;
-}
-.step-summary.open {
-  max-height: 500px;
-  padding: 10px 14px 10px 28px;
-}
-.step-summary code {
-  background: var(--surface2);
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: .75rem;
-  color: var(--text);
-}
-
-/* HALLAZGOS */
-.hallazgos-section { margin: 36px 0; }
-.section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 16px;
+/* Bars - Distribución */
+.dist-section { margin-bottom: 40px; }
+.bar-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
-.section-title .count-badge {
-  font-size: .72rem;
-  background: rgba(201,102,79,.15);
-  color: var(--accent);
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-weight: 600;
-}
-.hallazgos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
-.hallazgo-card {
-  background: var(--surface);
-  border: 1px solid #2a2a3a;
-  border-radius: var(--radius);
-  padding: 16px;
-}
-.hallazgo-card .h-title {
-  font-size: .82rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.hallazgo-card .h-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-.hallazgo-card .h-desc {
-  font-size: .72rem;
+.bar-label {
+  flex-shrink: 0;
+  width: 130px;
+  font-size: 13px;
   color: var(--muted);
-  margin-top: 4px;
+  text-align: right;
 }
-.hallazgo-bar {
-  height: 4px;
-  background: var(--surface2);
-  border-radius: 2px;
-  margin-top: 10px;
+@media (max-width: 480px) {
+  .bar-label { width: 90px; font-size: 11px; }
+}
+.bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--surface);
+  border-radius: 4px;
   overflow: hidden;
 }
-.hallazgo-bar-fill { height: 100%; border-radius: 2px; }
+.bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  min-width: 2px;
+}
+.bar-val {
+  flex-shrink: 0;
+  width: 48px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+}
 
-/* TOKEN CHART */
-.token-section { margin: 36px 0; }
-.chart-container {
+/* Riesgos */
+.riesgos-section { margin-bottom: 40px; }
+.riesgo-group-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+.riesgo-group-title:first-of-type { margin-top: 0; }
+.riesgo-group-title.alto { color: var(--alto); }
+.riesgo-group-title.medio { color: var(--medio); }
+.riesgo-group-title.bajo { color: var(--muted); }
+.riesgo-card {
   background: var(--surface);
-  border: 1px solid #2a2a3a;
-  border-radius: var(--radius);
-  padding: 24px 20px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  border-left: 3px solid;
 }
-.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 160px; padding-top: 10px; min-width: min-content; }
-.bar-group { min-width: 38px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
-.bar {
+.riesgo-card.alto { border-left-color: var(--alto); }
+.riesgo-card.medio { border-left-color: var(--medio); }
+.riesgo-card.bajo { border-left-color: var(--muted); }
+
+/* Tabla Faltantes */
+.faltantes-section { margin-bottom: 40px; }
+.faltantes-table {
   width: 100%;
-  max-width: 60px;
-  border-radius: 5px 5px 0 0;
-  min-height: 4px;
+  border-collapse: collapse;
 }
-.bar-label { font-size: .65rem; color: var(--muted); text-align: center; white-space: nowrap; }
-.bar-value { font-size: .7rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+.faltantes-table th {
+  text-align: left;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--surface2);
+  font-weight: 600;
+}
+.faltantes-table td {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(30,30,42,0.5);
+}
+.faltantes-table tr:last-child td { border-bottom: none; }
+.faltantes-table .num {
+  color: var(--muted);
+  font-size: 12px;
+  width: 30px;
+}
 
-/* FOOTER */
-footer {
+/* Hitos */
+.hitos-section { margin-bottom: 48px; }
+.hito-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(30,30,42,0.5);
+}
+.hito-item:last-child { border-bottom: none; }
+.hito-bullet {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-top: 7px;
+}
+.hito-text { font-size: 14px; }
+
+/* Footer */
+.footer {
   text-align: center;
-  padding: 40px 0 20px;
-  color: var(--pending);
-  font-size: .75rem;
-  border-top: 1px solid #1a1a2a;
-  margin-top: 40px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 640px) {
-  .container { padding: 16px 12px 40px; }
-  header h1 { font-size: 1.5rem; }
-  header .subtitle { font-size: .85rem; }
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .kpi { padding: 14px 12px; }
-  .kpi .value { font-size: 1.3rem; }
-  .kpi .label { font-size: .68rem; }
-  .phase-header { padding: 12px 14px; gap: 8px; flex-wrap: wrap; }
-  .phase-mini-bar { width: 50px; }
-  .phase-meta { font-size: .68rem; }
-  .phase-pct { font-size: .75rem; }
-  .progress-stats { flex-wrap: wrap; gap: 12px; font-size: .78rem; }
-  .step-row { padding: 8px 10px; gap: 8px; font-size: .8rem; }
-  .step-files { font-size: .68rem; }
-  .step-detail.open { padding-left: 8px; }
-  .step-summary.open { padding-left: 8px; }
-  .detail-filter { flex-wrap: wrap; }
-  .detail-filter input { width: 100%; }
-  .detail-table { font-size: .7rem; }
-  .detail-table td { padding: 5px 6px; max-width: 160px; }
-  .detail-table th { padding: 6px; font-size: .62rem; }
-  .detail-table-wrap { max-height: 320px; }
-  .hallazgos-grid { grid-template-columns: 1fr; }
-  .hallazgo-card { padding: 14px; }
-  .section-title { font-size: .95rem; }
-  .bar-chart { gap: 4px; height: 130px; }
-  .bar-group { min-width: 32px; }
-  .bar-label { font-size: .55rem; }
-  .bar-value { font-size: .6rem; }
-  .chart-container { padding: 16px 12px; }
-}
-
-@media (max-width: 380px) {
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .kpi .value { font-size: 1.1rem; }
-  .phase-badge { font-size: .6rem; padding: 3px 8px; }
-  .phase-title { font-size: .85rem; }
-  .bar-group { min-width: 28px; }
+  padding: 32px 0;
+  border-top: 1px solid var(--surface2);
+  color: var(--muted);
+  font-size: 13px;
 }
 </style>
 </head>
 <body>
 <div class="container">
 
-<!-- BACK NAV -->
-<a href="../" class="back-link">&larr; Todos los proyectos</a>
+  <a href="../" class="back-link">&larr; Todos los proyectos</a>
 
-<!-- HEADER -->
-<header>
-  <img src="../assets/logo-ihc-blanco.png" alt="Ingenium Holding Corp" style="height:240px;margin-bottom:24px;">
-  <h1>CAOBA de Novaterra P.H.</h1>
-  <div class="subtitle">Diagnostico Documental &mdash; Organizacion y Clasificacion con Prefijos</div>
-  <div class="date">03 Abr 2026</div>
-</header>
+  <!-- Header -->
+  <header class="header">
+    <img src="../assets/logo-ihc-blanco.png" alt="Ingenium Holding Corp">
+    <h1>CAOBA de Novaterra P.H.</h1>
+    <p class="subtitle">Consultor&iacute;a de Recepci&oacute;n de &Aacute;reas Comunes</p>
+    <p class="date">Abril 2026</p>
+    <span class="badge">Vista Ejecutiva</span>
+  </header>
 
-<!-- KPI CARDS -->
-<div class="kpi-grid">
-  <div class="kpi highlight">
-    <div class="value c-primary">100%</div>
-    <div class="label">Progreso General</div>
-    <div class="sub">1,951 de 1,951 docs</div>
-  </div>
-  <div class="kpi">
-    <div class="value">25<span style="font-size:.9rem;color:var(--muted)">/44</span></div>
-    <div class="label">Pasos Ejecutados</div>
-  </div>
-  <div class="kpi">
-    <div class="value">~30<span style="font-size:.8rem;color:var(--muted)"> min</span></div>
-    <div class="label">Tiempo Invertido</div>
-  </div>
-  <div class="kpi">
-    <div class="value">124K</div>
-    <div class="label">Tokens Consumidos</div>
-  </div>
-  <div class="kpi">
-    <div class="value c-accent">267</div>
-    <div class="label">Copias Eliminables</div>
-  </div>
-  <div class="kpi">
-    <div class="value c-success">3<span style="font-size:.9rem;color:var(--muted)">/3</span></div>
-    <div class="label">Fases Completadas</div>
-  </div>
-</div>
-
-<!-- GLOBAL PROGRESS -->
-<div class="progress-section">
-  <div class="progress-track">
-    <div class="progress-fill" style="width:100%"></div>
-  </div>
-  <div class="progress-stats">
-    <span><strong>1,951</strong> procesados</span>
-    <span><strong>0</strong> pendientes</span>
-    <span><strong>1,951</strong> total</span>
-  </div>
-</div>
-
-<!-- FASE A -->
-<div class="phase open" id="phaseA">
-  <div class="phase-header" onclick="togglePhase('phaseA')">
-    <span class="phase-badge badge-a">FASE A</span>
-    <span class="phase-title">Bienes No Esenciales</span>
-    <span class="phase-meta">130 archivos</span>
-    <div class="phase-mini-bar"><div class="phase-mini-fill fill-success" style="width:100%"></div></div>
-    <span class="phase-pct c-success">100%</span>
-    <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-  </div>
-  <div class="phase-body">
-
-    <!-- A.01 -->
-    <div class="step-row completed" onclick="toggleStep('a01')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>A.01</strong><span>Dotaciones zona social (8 zonas)</span></div>
-      <div class="step-files">46 archivos &middot; ~3 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="value">1,951</div>
+      <div class="label">Documentos Clasificados</div>
     </div>
-    <div class="step-summary" id="a01">
-      <p>BICICLETEROS (3) + BIOSALUDABLES (9) + CANCHA MULTIPLE (5) + CANCHA VOLLEY (3) + GIMNASIO (7) + JUEGOS INFANTILES (6) + SALON DE JUEGOS (10) + SALON REC INFANTIL (3)</p>
-      <p>Prefijos: <code>DOT_CER_</code> <code>DOT_FT_</code> <code>DOT_MTO_</code> <code>DOT_ACT_</code> <code>DOT_FAC_</code></p>
-      <p style="color:var(--accent);">10 duplicados, 3 en carpeta equivocada, 7 JPGs, 3 HIELO sin contexto, 2 encoding roto, 1 fuera de contexto</p>
+    <div class="kpi-card">
+      <div class="value warning">56.6%</div>
+      <div class="label">Completitud Documental</div>
     </div>
-
-    <!-- A.02 -->
-    <div class="step-row completed" onclick="toggleStep('a02')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>A.02</strong><span>Salones, Sendero, BBQ, Zona Canina</span></div>
-      <div class="step-files">27 archivos &middot; ~1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+    <div class="kpi-card">
+      <div class="value">30 <span style="font-size:18px;font-weight:400;color:var(--muted)">de 53</span></div>
+      <div class="label">Documentos Completos</div>
     </div>
-    <div class="step-summary" id="a02">
-      <p>SALONES SOCIALES (16) + SENDERO TROTE (3) + ZONA BBQ (3) + ZONA CANINA (5)</p>
-      <p>Prefijos: <code>DOT_MTO_</code> <code>DOT_FT_</code> <code>DOT_CER_</code> <code>DOT_ACT_</code> <code>DOT_INF_</code></p>
-      <p style="color:var(--accent);">Sendero: mismo archivo x3 carpetas. Zona Canina: acta x3. 1 .docx, 3 HIELO sin contexto</p>
-    </div>
-
-    <!-- A.03 -->
-    <div class="step-row completed" onclick="toggleStep('a03')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>A.03</strong><span>Zona Humeda &mdash; Piscinas</span></div>
-      <div class="step-files">57 archivos &middot; ~3 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="a03">
-      <p>Certificados (1) + Dotaciones (7) + Fichas T&eacute;cnicas/ZIP (25) + Manuales/ZIP (24)</p>
-      <p>Prefijos: <code>DOT_CER_</code> <code>DOT_FT_</code> <code>DOT_MTO_</code> <code>DOT_ACT_</code></p>
-      <p style="color:var(--accent);">25 duplicados exactos (fichas = manuales), 2 ZIPs redundantes, 1 doble ext .docx.pdf. Permisos corregidos con chmod</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- FASE B -->
-<div class="phase" id="phaseB">
-  <div class="phase-header" onclick="togglePhase('phaseB')">
-    <span class="phase-badge badge-a">FASE B</span>
-    <span class="phase-title">Documentacion Legal</span>
-    <span class="phase-meta">643 archivos</span>
-    <div class="phase-mini-bar"><div class="phase-mini-fill fill-success" style="width:100%"></div></div>
-    <span class="phase-pct c-success">100%</span>
-    <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-  </div>
-  <div class="phase-body">
-
-    <!-- B1.01 -->
-    <div class="step-row completed" onclick="toggleStep('b101')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B1.01</strong><span>Memorias + Planos E1 (inicio)</span></div>
-      <div class="step-files">50 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b101">
-      <p>7 memorias estructurales: <code>EST_MEM_caoba e1.pdf</code> &hellip; <code>EST_MEM_caoba e7.pdf</code></p>
-      <p>5 memorias NE: <code>EST_MEM_caoba e1 ne.pdf</code> &hellip; <code>EST_MEM_caoba e5 ne.pdf</code></p>
-      <p>38 planos E1: <code>EST_PLN_Caoba E1-00.PDF</code> &hellip; <code>EST_PLN_Caoba E1-40.PDF</code></p>
-    </div>
-
-    <!-- B1.02 -->
-    <div class="step-row completed" onclick="toggleStep('b102')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B1.02</strong><span>Planos E1 restantes + E2</span></div>
-      <div class="step-files">50 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b102">
-      <p>15 planos E1 restantes: <code>EST_PLN_Caoba E1-41.PDF</code> &hellip; <code>EST_PLN_Caoba E1-D-06.PDF</code></p>
-      <p>35 planos E2: <code>EST_PLN_Caoba E2-00.PDF</code> &hellip; <code>EST_PLN_EST_CAO E2-34.PDF</code></p>
-    </div>
-
-    <!-- B1.03 -->
-    <div class="step-row completed" onclick="toggleStep('b103')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B1.03</strong><span>Planos E2 restantes + E3</span></div>
-      <div class="step-files">59 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b103">
-      <p>13 planos E2 restantes</p>
-      <p>46 planos E3: serie completa de planos estructurales E3</p>
-    </div>
-
-    <!-- B1.04 -->
-    <div class="step-row completed" onclick="toggleStep('b104')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B1.04</strong><span>Planos E4-E7 + Suelos + Arq</span></div>
-      <div class="step-files">50 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b104">
-      <p>29 planos E4&ndash;E7</p>
-      <p>1 estudio de suelos: <code>EST_INF_Estudio de suelos Caoba.pdf</code></p>
-      <p>20 planos arquitectonicos: <code>ARQ_PLN_Caoba A-01.PDF</code> &hellip; <code>ARQ_PLN_Caoba A-20.PDF</code></p>
-    </div>
-
-    <!-- B1.05 -->
-    <div class="step-row completed" onclick="toggleStep('b105')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B1.05</strong><span>Arq restantes + PH + Resoluciones</span></div>
-      <div class="step-files">35 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b105">
-      <p>18 planos arquitectonicos restantes</p>
-      <p>14 planos PH: <code>ARQ_PLN_Caoba Ph-01.PDF</code> &hellip; <code>ARQ_PLN_Caoba Ph-14.PDF</code> + Cuadro de Areas</p>
-      <p>3 resoluciones: <code>ARQ_RES_...</code></p>
-    </div>
-
-    <!-- B2.01 -->
-    <div class="step-row completed" onclick="toggleStep('b201')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.01</strong><span>Planos EST 1 firmados</span></div>
-      <div class="step-files">50 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b201">
-      <p>50 planos EST 1 firmados: <code>EST_PLN_EST_CAO_TORRE DOBLE-326-21-...</code></p>
-    </div>
-
-    <!-- B2.02 -->
-    <div class="step-row completed" onclick="toggleStep('b202')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.02</strong><span>EST 1 restantes + EST 2</span></div>
-      <div class="step-files">50 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b202">
-      <p>21 planos EST 1 restantes</p>
-      <p>29 planos EST 2</p>
-    </div>
-
-    <!-- B2.03 -->
-    <div class="step-row completed" onclick="toggleStep('b203')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.03</strong><span>EST 2 restantes + EST 3</span></div>
-      <div class="step-files">50 archivos</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b203">
-      <p>26 planos EST 2 restantes</p>
-      <p>24 planos EST 3</p>
-    </div>
-
-    <!-- B2.04 -->
-    <div class="step-row completed" onclick="toggleStep('b204')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.04</strong><span>EST 3 restantes (27) + EST 4 (14) + EST 5 (7)</span></div>
-      <div class="step-files">48 archivos &middot; &lt;1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b204">
-      <p>27 planos EST 3 restantes + 14 planos EST 4 + 7 planos EST 5 = 48 archivos</p>
-    </div>
-
-    <!-- B2.05+06 -->
-    <div class="step-row completed" onclick="toggleStep('b205')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.05+06</strong><span>EST 6 (7) + EST 7 (4) + Aprobados Vanti (47)</span></div>
-      <div class="step-files">58 archivos &middot; &lt;1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b205">
-      <p>7 planos EST 6 + 4 planos EST 7 + 47 Aprobados Vanti = 58 archivos (B2.06 fusionado)</p>
-    </div>
-
-    <!-- B2.07 -->
-    <div class="step-row completed" onclick="toggleStep('b207')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.07</strong><span>Electricos (32) + Deteccion SYC (24)</span></div>
-      <div class="step-files">56 archivos &middot; &lt;1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b207">
-      <p>32 planos Electricos + 24 planos Deteccion SYC = 56 archivos</p>
-    </div>
-
-    <!-- B2.08 -->
-    <div class="step-row completed" onclick="toggleStep('b208')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.08</strong><span>Hidraulicos C.Bombas (8) + Parqueaderos (35) + Torre D (7)</span></div>
-      <div class="step-files">50 archivos &middot; &lt;1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b208">
-      <p>8 Hidraulicos C.Bombas + 35 Parqueaderos + 7 Torre D = 50 archivos</p>
-    </div>
-
-    <!-- B2.09 -->
-    <div class="step-row completed" onclick="toggleStep('b209')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B2.09</strong><span>Hidraulicos Torre D (2) + Torre S (9) + Urbanismo (15)</span></div>
-      <div class="step-files">26 archivos &middot; &lt;1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b209">
-      <p>2 Hidraulicos Torre D + 9 Torre S + 15 Urbanismo = 26 archivos</p>
-    </div>
-
-    <!-- B3.01 -->
-    <div class="step-row completed" onclick="toggleStep('b301')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>B3.01</strong><span>Especificaciones + Estrato + CTO + RPH + Manuales + CSV</span></div>
-      <div class="step-files">11 archivos &middot; &lt;1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="b301">
-      <p>Especificaciones + Estrato + CTO + RPH + Manuales + CSV = 11 archivos</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- FASE C -->
-<div class="phase" id="phaseC">
-  <div class="phase-header" onclick="togglePhase('phaseC')">
-    <span class="phase-badge badge-a">FASE C</span>
-    <span class="phase-title">Bienes Esenciales</span>
-    <span class="phase-meta">1,178 archivos</span>
-    <div class="phase-mini-bar"><div class="phase-mini-fill fill-success" style="width:100%"></div></div>
-    <span class="phase-pct c-success">100%</span>
-    <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-  </div>
-  <div class="phase-body">
-
-    <!-- C1.01 -->
-    <div class="step-row completed" onclick="toggleStep('c101')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C1.01</strong><span>Carpinterias + Aparatos (6 carpetas)</span></div>
-      <div class="step-files">51 archivos &middot; ~5 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c101">
-      <p>5 Aparatos e Incrustaciones: <code>DOT_FT_</code> (griferias, sanitarios)</p>
-      <p>9 Carp. Acero Inox/Vidrio: <code>DOT_CER_</code> <code>DOT_MTO_</code> &mdash; 4 duplicados entre carpetas</p>
-      <p>13 Carp. Aluminio: <code>DOT_FT_</code> <code>DOT_CER_</code> <code>EST_MEM_</code> (1 analisis estructural) <code>DOT_MTO_</code></p>
-      <p>10 Carp. Madera/Mesones: <code>DOT_CER_</code> <code>DOT_MTO_</code> <code>DOT_ESP_</code> &mdash; MANUALGMCARPINTEROS en 4 carpetas</p>
-      <p>10 Carp. Metalica PCF: <code>RCI_CER_</code> <code>RCI_FT_</code> <code>RCI_MTO_</code> &mdash; 4 archivos x 2-3 carpetas (duplicados)</p>
-      <p>4 Carp. Metalica: <code>DOT_CER_</code> <code>RCI_CER_</code> <code>RCI_MTO_</code> &mdash; 1 duplicado</p>
-      <p style="margin-top:6px;color:var(--accent);">Hallazgos: ~14 duplicados, ~8 en carpeta equivocada, fallo encoding E/U requirio reintento</p>
-    </div>
-
-    <!-- C2.01 -->
-    <div class="step-row completed" onclick="toggleStep('c201')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C2.01</strong><span>Controles + Legales + Dotacion</span></div>
-      <div class="step-files">50 archivos &middot; ~2 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c201">
-      <p>24 Controles Asentamientos: 7 <code>EST_CTR_</code> carteras + 10 <code>EST_CTR_</code> controles + 7 <code>EST_INF_</code> informes</p>
-      <p>11 Documentos Legales: <code>EST_CER_</code> certificados CTO por torre (T1-T18 + parqueaderos)</p>
-      <p>15 Dotacion: 14 <code>DOT_FAC_</code> facturas + 1 <code>DOT_MTO_</code> MANUALGMCARPINTEROS (5ta copia)</p>
-      <p style="margin-top:6px;color:var(--accent);">Hallazgos: 3 posibles duplicados por fecha, typos &ldquo;Torre Gua&rdquo; y &ldquo;TORRES TORRES&rdquo;</p>
-    </div>
-
-    <!-- C3.01 -->
-    <div class="step-row completed" onclick="toggleStep('c301')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C3.01</strong><span>Ganchos + Equipos + Impermeab Cubiertas T1-T15</span></div>
-      <div class="step-files">50 archivos &middot; ~3 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c301">
-      <p>2 Ganchos: <code>EST_PLN_</code> (1 DWG + 1 PDF con doble extension .pdf.pdf)</p>
-      <p>2 Hoja Vida Equipos: <code>ELE_HVE_</code> declaracion + <code>ELE_CER_</code> certificados transformador</p>
-      <p>45 Impermeab Cubiertas T1-T15: <code>DOT_ACT_</code> actas (T1-5,13-15) + <code>DOT_CER_</code> certificados (T6-12) + <code>DOT_FT_</code> fichas tecnicas</p>
-      <p>1 Manual mantenimiento cubiertas: <code>DOT_MTO_</code></p>
-      <p style="margin-top:6px;color:var(--accent);">Hallazgos: 30 duplicados masivos (impac-5000 y MANTO ROOFER copiados en cada torre)</p>
-    </div>
-    <!-- C3.02 -->
-    <div class="step-row completed" onclick="toggleStep('c302')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C3.02</strong><span>Impermeab Cubiertas T16-18 + Fachadas</span></div>
-      <div class="step-files">25 archivos &middot; ~1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c302">
-      <p>9 Cubiertas T16-18 + 15 Fachadas cert + 1 Fachadas manual. GARANTIA CAOBA.pdf repetido en 13 torres.</p>
-    </div>
-    <!-- C4.01 -->
-    <div class="step-row completed" onclick="toggleStep('c401')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C4.01</strong><span>Pisos + Red Contra Incendio</span></div>
-      <div class="step-files">37 archivos &middot; ~2 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c401">
-      <p>7 Pisos: 604602221 duplicado x4. 30 RCI: cert UL/FM, especificaciones, bombas, tanques.</p>
-    </div>
-    <!-- C5 -->
-    <div class="step-row completed" onclick="toggleStep('c5all')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C5.ALL</strong><span>Red Electrica (16 pasos &rarr; 1 bulk)</span></div>
-      <div class="step-files">769 archivos &middot; ~2 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c5all">
-      <p>729 RETIE/RITEL: bulk <code>ELE_CER_</code> en 1 comando</p>
-      <p>40 variados: apantallamiento, lamparas, medidores, planta electrica, subestacion, tuberia</p>
-      <p style="color:var(--accent);">Optimizacion: 16 pasos planeados ejecutados en 1. Ahorro ~48,000 tokens.</p>
-    </div>
-    <!-- C6 -->
-    <div class="step-row completed" onclick="toggleStep('c6all')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C6.ALL</strong><span>Red Gas + Hidraulica (2 pasos &rarr; 1)</span></div>
-      <div class="step-files">63 archivos &middot; ~1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c6all">
-      <p>32 Gas: actas conexion medidores por torre (T9 tiene 21 medidores individuales)</p>
-      <p>31 Hidraulica: equipos presion, eyectoras, tanques, certificados RETIE bombas</p>
-    </div>
-    <!-- C7 -->
-    <div class="step-row completed" onclick="toggleStep('c7all')">
-      <div class="step-icon done">&#10003;</div>
-      <div class="step-name"><strong>C7.ALL</strong><span>Seguridad + Ascensores (3 pasos &rarr; 1)</span></div>
-      <div class="step-files">133 archivos &middot; ~1 min</div>
-      <svg class="step-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="step-summary" id="c7all">
-      <p>14 Seguridad: talanqueras, senalizacion, citofonia</p>
-      <p>119 Ascensores: garantias y actas de entrega por torre (18 torres x ~6-7 docs)</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- HALLAZGOS -->
-<div class="hallazgos-section">
-  <div class="section-title">
-    Hallazgos del Diagnostico
-    <span class="count-badge">267 copias eliminables &middot; 188 nombres duplicados</span>
-  </div>
-
-  <!-- DUPLICADOS -->
-  <div class="phase" id="hallDup">
-    <div class="phase-header" onclick="togglePhase('hallDup')">
-      <span class="phase-badge" style="background:rgba(250,204,21,.15);color:var(--warning);">DUPLICADOS</span>
-      <span class="phase-title">Archivos identicos en multiples carpetas</span>
-      <span class="phase-meta">267 copias de 188 archivos</span>
-      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
-      <p style="color:var(--muted);margin-bottom:12px;">Top 20 archivos con mas copias. Accion: dejar 1 copia y eliminar las demas.</p>
-      <table class="detail-table">
-        <thead><tr><th>Archivo</th><th>Copias</th><th>Ubicacion</th></tr></thead>
-        <tbody>
-<tr><td>MEC_MTO_MANUAL ASCENSOR.pdf</td><td style="color:var(--warning);font-weight:700;">19</td><td>ASCENSORES &mdash; en cada torre (deberia estar 1 vez)</td></tr>
-<tr><td>DOT_FT_MANTO ROOFER 3500.pdf</td><td style="color:var(--warning);font-weight:700;">18</td><td>IMPERMEAB CUBIERTAS &mdash; copia en cada torre</td></tr>
-<tr><td>DOT_FT_impac-5000.pdf</td><td style="color:var(--warning);font-weight:700;">18</td><td>IMPERMEAB CUBIERTAS &mdash; copia en cada torre</td></tr>
-<tr><td>DOT_CER_GARANTIA CAOBA.pdf</td><td style="color:var(--warning);font-weight:700;">12</td><td>IMPERMEAB FACHADAS &mdash; copia en 12 torres</td></tr>
-<tr><td>MEC_CER_CARTA RETIE CAOBA ETAPA 2 TORRES 1-5.pdf</td><td>5</td><td>ASCENSORES Torres 1-5</td></tr>
-<tr><td>MEC_CER_Carta Ministerio Minas RETIE T.1.2.3.4.pdf</td><td>5</td><td>ASCENSORES Torres 1-4</td></tr>
-<tr><td>DOT_MTO_MANUALGMCARPINTEROS CAOBA.pdf</td><td>4</td><td>CARP. MADERA (Muebles + Puertas) + DOTACION</td></tr>
-<tr><td>DOT_FT_604602221-piso-pared-vancouver-hielo.pdf</td><td>4</td><td>PISOS (banos cert + banos manual + recepcion cert + recepcion manual)</td></tr>
-<tr><td>RCI_MTO_Manual Puertas V6.0 enero 2022.pdf</td><td>3</td><td>CARP METALICA PCF + CARP METALICA</td></tr>
-<tr><td>RCI_FT_FICHA TECNICA PCF FEB 2024 PUERTAS.pdf</td><td>3</td><td>CARP METALICA PCF (cert calidad + cert garantia + manual)</td></tr>
-<tr><td>RCI_CER_CERTIFICACION PCF 1 R3791 UL.pdf</td><td>3</td><td>CARP METALICA PCF (cert calidad + cert garantia)</td></tr>
-<tr><td>MEC_CER_CARTA RETIE CAOBA TORRES 14-15-16.pdf</td><td>3</td><td>ASCENSORES Torres 14, 15, 16</td></tr>
-<tr><td>ELE_CER_Subestacion.pdf</td><td>3</td><td>SUBESTACION (6 subcarpetas, mismo PDF)</td></tr>
-<tr><td>ELE_ACT_ACTA CIUDADELA NOVATERRA T.1.3.4.pdf</td><td>3</td><td>MEDIDORES Torres 1, 3, 4</td></tr>
-<tr><td>DOT_FT_FT AU-M003 Carro de Bomberos.pdf</td><td>3</td><td>JUEGOS INFANTILES (cert + ft + manual)</td></tr>
-<tr><td>DOT_ACT_ACTA ENTREGA MUELLES OBRA CAOBA.pdf</td><td>3</td><td>JUEGOS INFANTILES (cert + ft + manual)</td></tr>
-<tr><td>DOT_ACT_ACTA ENTREGA ZONA MASCOTAS.pdf</td><td>3</td><td>ZONA CANINA (mto + ft + cert)</td></tr>
-<tr><td>HID_MTO_MANUAL OPERACION IACOL BOMBEO 2024.pdf</td><td>2</td><td>HIDRAULICA (equipo presion + sub-drenaje)</td></tr>
-<tr><td>HID_FT_FICHA TECNICA TABLERO JOCKEY 3HP.pdf</td><td>2</td><td>HIDRAULICA (equipo presion + sub-drenaje)</td></tr>
-<tr><td>DOT_FT_MANUALES Y FT CAOBA (2).zip</td><td>2</td><td>ZONA HUMEDA (fichas tecnicas + manuales) &mdash; ZIP redundante</td></tr>
-        </tbody>
-      </table>
+    <div class="kpi-card">
+      <div class="value accent">9</div>
+      <div class="label">Faltantes Cr&iacute;ticos</div>
     </div>
   </div>
 
-  <!-- FORMATO -->
-  <div class="phase" id="hallFmt">
-    <div class="phase-header" onclick="togglePhase('hallFmt')">
-      <span class="phase-badge" style="background:rgba(96,165,250,.15);color:#60A5FA;">FORMATO</span>
-      <span class="phase-title">Archivos con formato no estandar</span>
-      <span class="phase-meta">15 archivos</span>
-      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+  <!-- Semáforo de Avance -->
+  <section class="semaforo">
+    <h2 class="section-title">Sem&aacute;foro de Avance</h2>
+    <div class="fase-row">
+      <span class="fase-num done">1</span>
+      <span class="fase-name">Recolecci&oacute;n Documental</span>
+      <span class="fase-status done">Completada</span>
     </div>
-    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
-      <table class="detail-table">
-        <thead><tr><th>Archivo</th><th>Problema</th><th>Ubicacion</th></tr></thead>
-        <tbody>
-<tr><td>DOT_FT_FICHA TECNICA PATIN (CAMINADOR AEREO).jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_FICHA TECNICA COLUMPIO.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_FICHA TECNICA VOLANTE.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_FICHA TECNICA TUMBONA.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_FICHA TECNICA BARRAS.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_FICHA TECNICA TWISTER.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_FICHA TECNICA SURF.jpg</td><td><span class="obs-tag obs-warn">JPG</span></td><td>BIOSALUDABLES</td></tr>
-<tr><td>DOT_FT_Ficha T&Atilde;&copy;cnica Mesa de Billar Pool (1).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td><td>SALON DE JUEGOS</td></tr>
-<tr><td>DOT_FT_Ficha T&Atilde;&copy;cnica Mesa de Ping Pong (2).pdf</td><td><span class="obs-tag obs-warn">Encoding roto</span></td><td>SALON DE JUEGOS</td></tr>
-<tr><td>DOT_MTO_MANUAL DE USO Y MTO PUERTAS.docx</td><td><span class="obs-tag obs-warn">.docx</span></td><td>SALONES SOCIALES (ya existe .pdf)</td></tr>
-<tr><td>EST_PLN_Plano Gancho mantenimiento.pdf.pdf</td><td><span class="obs-tag obs-warn">Doble ext</span></td><td>GANCHOS</td></tr>
-<tr><td>DOT_CER_Carta Garantia Caoba.docx.pdf</td><td><span class="obs-tag obs-warn">Doble ext</span></td><td>ZONA HUMEDA</td></tr>
-<tr><td>DOT_FT_MANUALES Y FT CAOBA (2).zip</td><td><span class="obs-tag obs-warn">ZIP redundante</span></td><td>ZONA HUMEDA / Fichas Tecnicas</td></tr>
-<tr><td>DOT_FT_MANUALES Y FT CAOBA (2).zip</td><td><span class="obs-tag obs-warn">ZIP redundante</span></td><td>ZONA HUMEDA / Manuales</td></tr>
-<tr><td>JUR_MTO_20250520CA_MZCNE 1.xlsx</td><td><span class="obs-tag obs-warn">.xlsx</span></td><td>Manual del Administrador</td></tr>
-        </tbody>
-      </table>
+    <div class="fase-row">
+      <span class="fase-num done">2</span>
+      <span class="fase-name">Organizaci&oacute;n y Clasificaci&oacute;n</span>
+      <span class="fase-status done">Completada</span>
     </div>
-  </div>
+    <div class="fase-row">
+      <span class="fase-num done">3</span>
+      <span class="fase-name">Diagn&oacute;stico de Completitud</span>
+      <span class="fase-status done">Completada</span>
+    </div>
+    <div class="fase-row">
+      <span class="fase-num pending">4</span>
+      <span class="fase-name pending-text">Inspecciones de Campo</span>
+      <span class="fase-status pending">Pendiente</span>
+    </div>
+    <div class="fase-row">
+      <span class="fase-num pending">5</span>
+      <span class="fase-name pending-text">Informes T&eacute;cnico-Jur&iacute;dicos</span>
+      <span class="fase-status pending">Pendiente</span>
+    </div>
+    <div class="fase-row">
+      <span class="fase-num pending">6</span>
+      <span class="fase-name pending-text">Acompa&ntilde;amiento</span>
+      <span class="fase-status pending">Pendiente</span>
+    </div>
+  </section>
 
-  <!-- SIN CONTEXTO -->
-  <div class="phase" id="hallCtx">
-    <div class="phase-header" onclick="togglePhase('hallCtx')">
-      <span class="phase-badge" style="background:rgba(136,136,160,.15);color:var(--muted);">SIN CONTEXTO</span>
-      <span class="phase-title">Archivos sin nombre descriptivo o fuera de lugar</span>
-      <span class="phase-meta">7 archivos</span>
-      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
-      <table class="detail-table">
-        <thead><tr><th>Archivo</th><th>Problema</th><th>Ubicacion</th></tr></thead>
-        <tbody>
-<tr><td>DOT_FT_HIELO 1.pdf</td><td><span class="obs-tag obs-default">Nombre sin contexto</span></td><td>SALON DE JUEGOS + SALONES SOCIALES</td></tr>
-<tr><td>DOT_FT_HIELO 2.pdf</td><td><span class="obs-tag obs-default">Nombre sin contexto</span></td><td>SALON DE JUEGOS + SALONES SOCIALES</td></tr>
-<tr><td>DOT_FT_HIELO 3.pdf</td><td><span class="obs-tag obs-default">Nombre sin contexto</span></td><td>SALON DE JUEGOS + SALONES SOCIALES</td></tr>
-<tr><td>DOT_CER_Ventaneria.pdf</td><td><span class="obs-tag obs-default">Fuera de contexto</span></td><td>GIMNASIO / Certificados (no pertenece a gimnasio)</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <!-- Distribución por Especialidad -->
+  <section class="dist-section">
+    <h2 class="section-title">Distribuci&oacute;n por Especialidad</h2>
+    <div id="bars"></div>
+  </section>
 
-  <!-- CARPETAS VACIAS -->
-  <div class="phase" id="hallEmpty">
-    <div class="phase-header" onclick="togglePhase('hallEmpty')">
-      <span class="phase-badge" style="background:rgba(201,102,79,.15);color:var(--accent);">VACIAS</span>
-      <span class="phase-title">Carpetas sin documentos</span>
-      <span class="phase-meta">Documentacion faltante o pendiente</span>
-      <svg class="phase-chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
-    </div>
-    <div class="phase-body" style="font-size:.82rem;line-height:1.8;">
-      <p style="color:var(--muted);margin-bottom:12px;">Carpetas que existen en la estructura pero no contienen archivos. Puede indicar documentacion no entregada por la constructora.</p>
-      <table class="detail-table">
-        <thead><tr><th>Carpeta</th><th>Sistema</th></tr></thead>
-        <tbody>
-<tr><td>7. SERVIDUMBRE ENEL</td><td>Juridico/Legal</td></tr>
-<tr><td>CERTIFICACION RETILAP</td><td>Electrico</td></tr>
-<tr><td>CERTIFICACION RITEL (Torres 1-18)</td><td>Electrico &mdash; 18 torres sin certificacion</td></tr>
-<tr><td>RETIE Torres 5, 12, 17, 18</td><td>Electrico &mdash; 4 torres sin certificacion</td></tr>
-<tr><td>CUBIERTAS en vidrio / claraboyas (cert + manual)</td><td>Arquitectonico</td></tr>
-<tr><td>Equipos a gas ZC (manual + cert + ficha)</td><td>Gas</td></tr>
-<tr><td>Ascensores Torre 6 y 7 (cert ONAC + actas arranque)</td><td>Electromecanico</td></tr>
-<tr><td>Deteccion incendio (manual + acta + cert garantia)</td><td>Seguridad</td></tr>
-<tr><td>Citofonia (manual + ficha tecnica)</td><td>Seguridad</td></tr>
-<tr><td>Extintores (ficha + certificado)</td><td>Seguridad</td></tr>
-<tr><td>Tanques (impermeab + garantia + ficha + manual mto)</td><td>Hidraulico</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <!-- Riesgos Documentales -->
+  <section class="riesgos-section">
+    <h2 class="section-title">Riesgos Documentales</h2>
 
-</div>
+    <p class="riesgo-group-title alto">Alto</p>
+    <div class="riesgo-card alto">RITEL sin certificaci&oacute;n en 18 torres</div>
+    <div class="riesgo-card alto">RETIE faltante en Torres 5, 12, 17 y 18</div>
+    <div class="riesgo-card alto">Sin licencia de urbanismo</div>
+    <div class="riesgo-card alto">Sin estudio de seguridad humana</div>
 
-<!-- TOKEN CHART -->
-<div class="token-section">
-  <div class="section-title">Consumo de Tokens por Paso</div>
-  <div class="chart-container">
-    <div class="bar-chart" id="tokenChart">
-      <div class="bar-group">
-        <div class="bar-value">8.2K</div>
-        <div class="bar" style="height:54%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">A.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">5.1K</div>
-        <div class="bar" style="height:34%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">A.02</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">6.8K</div>
-        <div class="bar" style="height:45%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">A.03</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">7.5K</div>
-        <div class="bar" style="height:50%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B1.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">7.2K</div>
-        <div class="bar" style="height:48%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B1.02</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">8.9K</div>
-        <div class="bar" style="height:59%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B1.03</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">7.4K</div>
-        <div class="bar" style="height:49%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B1.04</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">5.3K</div>
-        <div class="bar" style="height:35%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B1.05</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">5.0K</div>
-        <div class="bar" style="height:33%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4.8K</div>
-        <div class="bar" style="height:32%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.02</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4.8K</div>
-        <div class="bar" style="height:32%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.03</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.04</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.05+06</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.07</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.08</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">3K</div>
-        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B2.09</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--success),#2a9d5c);"></div>
-        <div class="bar-label">B3.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">6K</div>
-        <div class="bar" style="height:40%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C1.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C2.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C3.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">3K</div>
-        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C3.02</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">3K</div>
-        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C4.01</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">4K</div>
-        <div class="bar" style="height:27%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C5.ALL</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">3K</div>
-        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C6.ALL</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-value">3K</div>
-        <div class="bar" style="height:20%;background:linear-gradient(180deg,var(--primary),var(--dark));"></div>
-        <div class="bar-label">C7.ALL</div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--muted);">
-      Total acumulado: <strong style="color:var(--text);">124K tokens</strong> &middot; Promedio por paso: <strong style="color:var(--text);">5.0K</strong>
-    </div>
-  </div>
-</div>
+    <p class="riesgo-group-title medio">Medio</p>
+    <div class="riesgo-card medio">Memorias de c&aacute;lculo hidr&aacute;ulico pendientes</div>
+    <div class="riesgo-card medio">Dossier detecci&oacute;n incendio incompleto</div>
+    <div class="riesgo-card medio">Impermeabilizaci&oacute;n fachadas Torres 7, 8, 9 sin garant&iacute;a</div>
 
-<!-- FOOTER -->
-<footer>
-  <p>Creado con <span style="color:var(--primary);">&hearts;</span> por Ingenium Holding Corp S.A.S &copy; <span id="year-caoba"></span> &mdash; Desde Latam para el mundo.</p>
-</footer>
+    <p class="riesgo-group-title bajo">Bajo</p>
+    <div class="riesgo-card bajo">Manual del administrador en formato Excel</div>
+    <div class="riesgo-card bajo">7 amenidades sin cobertura en checklist</div>
+  </section>
+
+  <!-- Documentos Faltantes Críticos -->
+  <section class="faltantes-section">
+    <h2 class="section-title">Documentos Faltantes Cr&iacute;ticos (9)</h2>
+    <table class="faltantes-table">
+      <thead>
+        <tr><th class="num">#</th><th>Documento</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Licencia de Urbanismo</td></tr>
+        <tr><td class="num">2</td><td>Acreditaci&oacute;n &Aacute;reas de Cesi&oacute;n</td></tr>
+        <tr><td class="num">3</td><td>Actas de Vecindad</td></tr>
+        <tr><td class="num">4</td><td>Aprobaci&oacute;n EAMOS (Acueducto Mosquera)</td></tr>
+        <tr><td class="num">5</td><td>Dise&ntilde;o RITEL (18 torres)</td></tr>
+        <tr><td class="num">6</td><td>Impermeabilizaci&oacute;n Fosos Ascensor</td></tr>
+        <tr><td class="num">7</td><td>Estudio de Seguridad Humana</td></tr>
+        <tr><td class="num">8</td><td>Dise&ntilde;o Redes Datos/Comunicaciones</td></tr>
+        <tr><td class="num">9</td><td>Aprobaci&oacute;n Acueducto y Alcantarillado</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Próximos Hitos -->
+  <section class="hitos-section">
+    <h2 class="section-title">Pr&oacute;ximos Hitos</h2>
+    <div class="hito-item">
+      <span class="hito-bullet"></span>
+      <span class="hito-text">Solicitar documentos faltantes al constructor (Derecho de Petici&oacute;n)</span>
+    </div>
+    <div class="hito-item">
+      <span class="hito-bullet"></span>
+      <span class="hito-text">Completar certificaciones RETIE faltantes</span>
+    </div>
+    <div class="hito-item">
+      <span class="hito-bullet"></span>
+      <span class="hito-text">Programar inspecciones de campo</span>
+    </div>
+    <div class="hito-item">
+      <span class="hito-bullet"></span>
+      <span class="hito-text">Elaborar Informe Documental V1</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Ingenium Holding Corp S.A.S &copy; <span id="year"></span> &mdash; Desde Latam para el mundo.
+  </footer>
 
 </div>
 
 <script>
-document.getElementById('year-caoba').textContent = new Date().getFullYear();
-</script>
-<script>
-function togglePhase(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
 
-function toggleStep(id) {
-  var el = document.getElementById(id);
-  var isOpen = el.classList.contains('open');
-  el.classList.toggle('open');
-  // Find the step-row before this detail/summary
-  var prev = el.previousElementSibling;
-  while (prev && !prev.classList.contains('step-row')) {
-    prev = prev.previousElementSibling;
-  }
-  if (prev) {
-    prev.classList.toggle('expanded', !isOpen);
-  }
-}
-
-function filterTable(input, tableId) {
-  var query = input.value.toLowerCase();
-  var table = document.getElementById(tableId);
-  var rows = table.querySelectorAll('tbody tr');
-  var visible = 0;
-  rows.forEach(function(row) {
-    var text = row.textContent.toLowerCase();
-    var match = text.indexOf(query) !== -1;
-    row.style.display = match ? '' : 'none';
-    if (match) visible++;
-  });
-  var countEl = document.getElementById(tableId.replace('-table', '-count'));
-  if (countEl) {
-    countEl.textContent = visible + ' documento' + (visible !== 1 ? 's' : '');
-  }
-}
+// Bars
+var data = [
+  ['El\u00e9ctrico (ELE)', 802],
+  ['Estructural (EST)', 439],
+  ['Dotaciones (DOT)', 261],
+  ['Mec\u00e1nico (MEC)', 119],
+  ['Hidr\u00e1ulico (HID)', 107],
+  ['Gas (GAS)', 79],
+  ['Contra Incendio (RCI)', 67],
+  ['Arquitect\u00f3nico (ARQ)', 52],
+  ['Seguridad (SEG)', 14],
+  ['Jur\u00eddico (JUR)', 6],
+  ['Licencias (LIC)', 3]
+];
+var max = data[0][1];
+var container = document.getElementById('bars');
+data.forEach(function(d) {
+  var pct = (d[1] / max * 100).toFixed(1);
+  var row = document.createElement('div');
+  row.className = 'bar-row';
+  row.innerHTML =
+    '<span class="bar-label">' + d[0] + '</span>' +
+    '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+    '<span class="bar-val">' + d[1] + '</span>';
+  container.appendChild(row);
+});
 </script>
 </body>
 </html>
