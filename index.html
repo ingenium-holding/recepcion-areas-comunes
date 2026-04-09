@@ -407,13 +407,18 @@ p {
 /* ══════════════════════════════════════
    SECTION 7 — CASO DE ESTUDIO
    ══════════════════════════════════════ */
+.caso-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+@media(max-width:440px){.caso-grid{grid-template-columns:1fr}}
+
 .caso-card {
   background: var(--surface);
   border: 1px solid rgba(150, 0, 193, 0.2);
   border-radius: 16px;
   padding: 40px;
-  max-width: 560px;
-  margin: 0 auto;
   text-decoration: none;
   display: block;
   transition: border-color 0.2s, transform 0.15s;
@@ -785,9 +790,24 @@ footer a:hover {
 <section class="caso">
   <div class="container">
     <div class="section-header">
-      <span class="section-label">Caso de estudio</span>
-      <h2>Proyecto en Curso</h2>
+      <span class="section-label">Casos de estudio</span>
+      <h2>Proyectos Reales</h2>
     </div>
+    <div class="caso-grid">
+    <a href="casos/torre-demo/" class="caso-card">
+      <h3>Edificio de uso mixto — Bogota D.C.</h3>
+      <div class="caso-stats">
+        <div class="caso-stat">
+          <span class="caso-stat-value">146</span>
+          <span class="caso-stat-label">no conformidades identificadas</span>
+        </div>
+        <div class="caso-stat">
+          <span class="caso-stat-value">8</span>
+          <span class="caso-stat-label">especialidades evaluadas</span>
+        </div>
+      </div>
+      <span class="caso-link">Ver caso de estudio &rarr;</span>
+    </a>
     <a href="casos/caoba-demo/" class="caso-card">
       <h3>Conjunto residencial — Cundinamarca</h3>
       <div class="caso-stats">
@@ -802,6 +822,7 @@ footer a:hover {
       </div>
       <span class="caso-link">Ver caso de estudio &rarr;</span>
     </a>
+    </div>
   </div>
 </section>
 
